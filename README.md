@@ -1,4 +1,4 @@
-# ml-rest-api
+# ml_rest_api
 A RESTful API to return predictions from a trained ML model, built with Python 3 and Flask-RESTplus
 
 Borrows heavily from the work done by Michał Karzyński:
