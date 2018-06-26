@@ -29,6 +29,10 @@ Open the URL http://localhost:8888/api/ with your browser and see the sample Swa
 
 TODO
 
+## Build automation
+
+This project is built into a Docker image using the Docker Hum automated build at https://hub.docker.com/r/jgbustos/ml-rest-api/
+
 ## Acknowledgements
 This projects borrows heavily from the work done by Michał Karzyński:
   * https://github.com/postrational/rest_api_demo
