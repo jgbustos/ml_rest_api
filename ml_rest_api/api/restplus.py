@@ -5,9 +5,9 @@ from ml_rest_api.settings import settings
 
 log = logging.getLogger(__name__)
 
-api = Api(version='1.0', 
-          title='Godel ML Predictor API',
-          description='A simple demonstration of a Flask-RESTPlus powered service to make predictions using a ML model',
+api = Api(version='0.1', 
+          title='Godel ML REST API',
+          description='A RESTful API to return predictions from a trained ML model, built with Python 3 and Flask-RESTplus',
           default='health',
           default_label='Basic health check methods',)
 
