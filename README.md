@@ -25,7 +25,9 @@ Finally, run the project:
 Open the URL http://localhost:8888/api/ with your browser and see the sample Swagger documentation
 
 ## Interfaces exposed
-Swagger JSON file available from URL http://localhost:8888/api/swagger.json
+Swagger JSON 
+
+available from URL http://localhost:8888/api/swagger.json
 
 ### Health
 These two methods are meant to be used as the liveness and readiness probes in a Kubernetes deployment:
@@ -37,6 +39,41 @@ These two methods are meant to be used as the liveness and readiness probes in a
   * 500/"Not Ready" if model is not correctly initialised
   * 400/Validation error if any mandatory parameter is missing or the wrong data type (e.g. str, int, bool, datetime...) is supplied
   * 200/Predicted value based on JSON input
+
+## Config settings
+Configuration parameters are contained in the file **ml_rest_api/settings.py**, but they can also be overriden by setting env vars:
+```
+settings = {
+    # Flask settings
+    'FLASK_SERVER_NAME': 'localhost:8888',
+    'FLASK_HOST': '0.0.0.0',
+    'FLASK_PORT': 8888,
+    'FLASK_DEBUG': True,
+
+    # Flask-Restplus settings
+    'SWAGGER_UI_DOC_EXPANSION': 'list',
+    'RESTPLUS_VALIDATE': True,
+    'RESTPLUS_MASK_SWAGGER': False,
+    'ERROR_404_HELP': False,
+    'SWAGGER_UI_JSONEDITOR': True,
+
+    # Trained ML/AI model settings
+    'TRAINED_MODEL_MODULE_NAME': 'ml_trained_model',
+}
+```
+
+| Parameter | Values | Details |
+| --- | --- | --- |
+| FLASK_SERVER_NAME | e.g.: localhost:8888 | Flask server name |
+| FLASK_HOST      | e.g.: 0.0.0.0      | Leave as 0.0.0.0 to avoid virtual host filtering |
+| FLASK_PORT | e.g.: 8888      | Choose whatever suits you, go crazy |
+| FLASK_DEBUG | False/True      | Do not use debug mode in production |
+| SWAGGER_UI_DOC_EXPANSION | 'none', 'list' or 'full' | Explained here: https://flask-restplus.readthedocs.io/en/stable/swagger.html |
+| RESTPLUS_VALIDATE | False/True      | Explained here: https://flask-restplus.readthedocs.io/en/stable/swagger.html |
+| RESTPLUS_MASK_SWAGGER | False/True      | Explained here: https://flask-restplus.readthedocs.io/en/stable/mask.html |
+| ERROR_404_HELP | False/True      | Explained here: https://flask-restplus.readthedocs.io/en/stable/quickstart.html |
+| SWAGGER_UI_JSONEDITOR | False/True      | Enable a JSON editor in the Swagger interface |
+| TRAINED_MODEL_MODULE_NAME | e.g.: ml_trained_model | Name of the Python module that initialises the ML model and returns predictions (see [section below](#setting-up-the-model)) |
 
 ## Setting up the model
 TODO
