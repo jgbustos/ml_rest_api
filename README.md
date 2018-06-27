@@ -24,6 +24,20 @@ Finally, run the project:
 ```
 Open the URL http://localhost:8888/api/ with your browser and see the sample Swagger documentation
 
+## Interfaces exposed
+Swagger JSON file available from URL http://localhost:8888/api/swagger.json
+
+### Health
+These two methods are meant to be used as the liveness and readiness probes in a Kubernetes deployment:
+* GET http://localhost:8888/api/liveness returns 200/"Alive" if the service is up and running
+* GET http://localhost:8888/api/readiness returns 200/"Ready" or 500/"Not Ready" depending on whether the ML model has been correctly initialised or not
+
+### Model
+* POST http://localhost:8888/api/model/predict will return a prediction using the ML model. The data_point structure shows the JSON argument that must be supplied, and example values for each of the fields. The service will validate that all the mandatory values are passed. Return values are:
+  * 500/"Not Ready" if model is not correctly initialised
+  * 400/Validation error if any mandatory parameter is missing or the wrong data type (e.g. str, int, bool, datetime...) is supplied
+  * 200/Predicted value based on JSON input
+
 ## Setting up the model
 TODO
 
