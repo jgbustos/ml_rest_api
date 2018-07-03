@@ -25,34 +25,35 @@ if data_sample is not None:
             try:
                 parse_date(value)
                 fields_class = fields.Date
-            except ValueError as ve:
+            except ValueError:
                 pass
             try:
                 parse_datetime(value)
                 fields_class = fields.DateTime
-            except ValueError as ve:
+            except ValueError:
                 pass
         data_point_dict[key] = fields_class(example=value, readonly=True, required=True)
 data_point = api.model('data_point', data_point_dict)
 
-ns = api.namespace('model', description='Methods supported by our ML model', validate=(data_sample is not None))
+ns = api.namespace('model', description='Methods supported by our ML model',
+                   validate=(data_sample is not None))
 
 @ns.route('/predict')
 class ModelPredict(Resource):
 
+    @staticmethod
     @api.expect(data_point)
     @api.doc(responses={
         HTTPStatus.OK: 'Success',
         HTTPStatus.BAD_REQUEST: 'Input Validation Error',
         HTTPStatus.INTERNAL_SERVER_ERROR: 'Server Not Ready',
     })
-    def post(self):
+    def post():
         """
         Returns a prediction using the model.
         """
-        if not trained_model_wrapper.ready():
-            return 'Not Ready', HTTPStatus.INTERNAL_SERVER_ERROR
-        else:
+        if trained_model_wrapper.ready():
             data = dict(request.json)
             ret = trained_model_wrapper.run(data)
             return ret, HTTPStatus.OK
+        return 'Not Ready', HTTPStatus.INTERNAL_SERVER_ERROR

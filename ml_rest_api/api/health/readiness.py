@@ -8,15 +8,15 @@ ns = api.default_namespace
 @ns.route('/readiness')
 class HealthReadiness(Resource):
 
+    @staticmethod
     @api.doc(responses={
         HTTPStatus.OK: 'Success',
         HTTPStatus.INTERNAL_SERVER_ERROR: 'Server Not Ready',
     })
-    def get(self):
+    def get():
         """
         Returns readiness status
         """
         if trained_model_wrapper.ready():
             return 'Ready', HTTPStatus.OK
-        else:
-            return 'Not Ready', HTTPStatus.INTERNAL_SERVER_ERROR
+        return 'Not Ready', HTTPStatus.INTERNAL_SERVER_ERROR

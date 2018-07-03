@@ -31,8 +31,10 @@ def initialize_app(flask_app):
     trained_model_wrapper.init()
 
 def main():
-    log.info('***** Starting development server at http://{}/api/ *****'.format(get_value('FLASK_SERVER_NAME')))
-    app.run(debug=get_value('FLASK_DEBUG'), port=get_value('FLASK_PORT'), host=get_value('FLASK_HOST'))
+    log.info('***** Starting development server at http://%s/api/ *****',
+             get_value('FLASK_SERVER_NAME'))
+    app.run(debug=get_value('FLASK_DEBUG'), port=get_value('FLASK_PORT'),
+            host=get_value('FLASK_HOST'))
 
 app = Flask(__name__)
 logging_conf_path = os.path.normpath(os.path.join(os.path.dirname(__file__), '../logging.conf'))

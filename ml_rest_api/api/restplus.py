@@ -5,18 +5,17 @@ from ml_rest_api.settings import settings
 
 log = logging.getLogger(__name__)
 
-api = Api(version='0.1', 
+api = Api(version='0.1',
           title='Godel ML REST API',
-          description='A RESTful API to return predictions from a trained ML model, built with Python 3 and Flask-RESTplus',
+          description='A RESTful API to return predictions from a trained ML model, \
+          built with Python 3 and Flask-RESTplus',
           default='health',
           default_label='Basic health check methods',)
 
 
 @api.errorhandler
-def default_error_handler(e):
-    message = 'An unhandled exception occurred.'
-    log.exception(message)
-
-    if not settings['FLASK_DEBUG']:
-        return {'message': message}, HTTPStatus.INTERNAL_SERVER_ERROR
-
+def default_error_handler(exception):
+    log.exception(exception.message)
+    if settings['FLASK_DEBUG']:
+        return {'message': exception.message}, HTTPStatus.INTERNAL_SERVER_ERROR
+    return {'message': 'An unhandled exception occurred.'}, HTTPStatus.INTERNAL_SERVER_ERROR

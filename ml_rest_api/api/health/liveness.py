@@ -7,10 +7,11 @@ ns = api.default_namespace
 @ns.route('/liveness')
 class HealthLiveness(Resource):
 
+    @staticmethod
     @api.doc(responses={
         HTTPStatus.OK: 'Success',
     })
-    def get(self):
+    def get():
         """
         Returns liveness status.
         """
