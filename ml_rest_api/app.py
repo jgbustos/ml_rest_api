@@ -1,3 +1,4 @@
+"""This module is the RESTful service entry point."""
 import os
 import sys
 import logging.config
@@ -12,6 +13,7 @@ import ml_rest_api.api.model.predict
 from ml_rest_api.api.restplus import api
 
 def configure_app(flask_app):
+    """Configures the app."""
     settings_to_apply = [
         #'FLASK_SERVER_NAME',
         'SWAGGER_UI_DOC_EXPANSION',
@@ -24,6 +26,7 @@ def configure_app(flask_app):
         flask_app.config[key] = get_value(key)
 
 def initialize_app(flask_app):
+    """Initialises the app."""
     configure_app(flask_app)
     blueprint = Blueprint('api', __name__, url_prefix='/api')
     api.init_app(blueprint)
@@ -31,6 +34,7 @@ def initialize_app(flask_app):
     trained_model_wrapper.init()
 
 def main():
+    """Main routine, executed only if running as stand-alone."""
     log.info('***** Starting development server at http://%s/api/ *****',
              get_value('FLASK_SERVER_NAME'))
     app.run(debug=get_value('FLASK_DEBUG'), port=get_value('FLASK_PORT'),

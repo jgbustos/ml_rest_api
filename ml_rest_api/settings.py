@@ -1,3 +1,4 @@
+"""Settings file."""
 import os
 
 settings = {
@@ -19,4 +20,5 @@ settings = {
 }
 
 def get_value(key):
+    """Returns a value from the corresponding env var or from settings if env var doesn't exist."""
     return os.environ[key] if key in os.environ else settings[key]

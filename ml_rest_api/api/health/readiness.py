@@ -1,3 +1,4 @@
+"""This module implements the HealthReadiness class."""
 from http import HTTPStatus
 from flask_restplus import Resource
 from ml_rest_api.api.restplus import api
@@ -7,6 +8,7 @@ ns = api.default_namespace
 
 @ns.route('/readiness')
 class HealthReadiness(Resource):
+    """Implements the /readiness GET method."""
 
     @staticmethod
     @api.doc(responses={

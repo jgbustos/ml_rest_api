@@ -1,3 +1,4 @@
+"""This module implements the ModelPredict class."""
 import logging
 from http import HTTPStatus
 from aniso8601 import parse_date, parse_datetime
@@ -40,6 +41,7 @@ ns = api.namespace('model', description='Methods supported by our ML model',
 
 @ns.route('/predict')
 class ModelPredict(Resource):
+    """Implements the /model/predict POST method."""
 
     @staticmethod
     @api.expect(data_point)
