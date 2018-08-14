@@ -4,7 +4,7 @@ import os.path
 import importlib
 from ml_rest_api.settings import get_value
 
-class TrainedModelWrapper(object):
+class TrainedModelWrapper:
     """TrainedModelWrapper class acts as adapter for programmatically chosen ML trained model
     module. The init(), run(), ready() and sample() methods call the module's identically named
     methods."""

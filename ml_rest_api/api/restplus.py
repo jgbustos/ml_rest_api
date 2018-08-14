@@ -2,7 +2,7 @@
 import logging
 from http import HTTPStatus
 from flask_restplus import Api
-from ml_rest_api.settings import settings
+from ml_rest_api.settings import get_value
 
 log = logging.getLogger(__name__)
 
@@ -18,6 +18,6 @@ api = Api(version='0.1',
 def default_error_handler(exception):
     """Default error handler that returns HTTP 500 error."""
     log.exception(exception.message)
-    if settings['FLASK_DEBUG']:
+    if get_value('FLASK_DEBUG'):
         return {'message': exception.message}, HTTPStatus.INTERNAL_SERVER_ERROR
     return {'message': 'An unhandled exception occurred.'}, HTTPStatus.INTERNAL_SERVER_ERROR

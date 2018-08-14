@@ -7,8 +7,8 @@ sys.path.append(os.path.normpath(os.path.join(os.path.dirname(__file__), '../'))
 from flask import Flask, Blueprint
 from ml_rest_api.settings import get_value
 from ml_rest_api.ml_trained_model.wrapper import trained_model_wrapper
-import ml_rest_api.api.health.liveness
-import ml_rest_api.api.health.readiness
+from ml_rest_api.api.health.liveness import HealthLiveness
+from ml_rest_api.api.health.readiness import HealthReadiness
 import ml_rest_api.api.model.predict
 from ml_rest_api.api.restplus import api
 

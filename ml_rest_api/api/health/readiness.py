@@ -4,9 +4,7 @@ from flask_restplus import Resource
 from ml_rest_api.api.restplus import api
 from ml_rest_api.ml_trained_model.wrapper import trained_model_wrapper
 
-ns = api.default_namespace
-
-@ns.route('/readiness')
+@api.default_namespace.route('/readiness')
 class HealthReadiness(Resource):
     """Implements the /readiness GET method."""
 
