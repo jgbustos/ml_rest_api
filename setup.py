@@ -31,7 +31,7 @@ setup(
                       'scipy==1.1.0',
                       'pandas==0.23.4',
                       'scikit-learn==0.20.0',
-                      'lightgbm==2.2.0',
+                      'lightgbm==2.2.1',
                       'tensorflow==1.11.0',
-                      'keras==2.2.3',],
+                      'keras==2.2.4',],
 )
