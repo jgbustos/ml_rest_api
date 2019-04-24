@@ -1,6 +1,6 @@
 Flask==1.0.2
 flask-restplus==0.12.1
-numpy==1.16.2
+numpy==1.16.3
 scipy==1.2.1
 pandas==0.24.2
 scikit-learn==0.20.3
@@ -8,3 +8,4 @@ lightgbm==2.2.3
 xgboost==0.82 
 tensorflow==1.13.1
 keras==2.2.4
+nltk==3.4.1
