@@ -20,7 +20,7 @@ This method should return a Python dictionary with sample values for each of the
 ## def run()
 This function does all the ML prediction heavy lifting. It will receive either a Python dictionary or a Pandas DataFrame as input, do all the necessary transformations, then finally call model.predict() and return the result.
 
-The eagled-eyed reader will have noticed that the methods init() and run() are the same two that Microsoft prescribe when deploying a trained ML model to [Azure Machine Learning](https://docs.microsoft.com/en-us/azure/machine-learning/desktop-workbench/tutorial-classifying-iris-part-3). We just added ready() and sample() for more advanced functionality:
+The eagled-eyed reader will have noticed that the methods init() and run() are the same two that Microsoft prescribe when deploying a trained ML model to [Azure Machine Learning](https://docs.microsoft.com/en-us/azure/machine-learning/service/how-to-deploy-and-where). We just added ready() and sample() for more advanced functionality:
 * Kubernetes readiness probe
 * Swagger documentation
 * JSON input validation
