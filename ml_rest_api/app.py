@@ -31,7 +31,7 @@ def initialize_app(flask_app):
     blueprint = Blueprint('api', __name__, url_prefix='/api')
     api.init_app(blueprint)
     flask_app.register_blueprint(blueprint)
-    trained_model_wrapper.init()
+    trained_model_wrapper.multithreaded_init()
 
 def main():
     """Main routine, executed only if running as stand-alone."""

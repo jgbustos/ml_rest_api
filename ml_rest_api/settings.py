@@ -20,4 +20,4 @@ def get_value(key):
         # Trained ML/AI model settings
         'TRAINED_MODEL_MODULE_NAME': 'ml_trained_model',
     }
-    return os.environ[key] if key in os.environ else settings[key]
+    return os.environ[key] if key in os.environ else settings.get(key, False)
