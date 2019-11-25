@@ -5,7 +5,7 @@ from datetime import datetime, date
 from os.path import normpath, join, dirname
 import numpy as np
 import pandas as pd
-#from sklearn.externals import joblib
+import joblib
 
 log = logging.getLogger(__name__)
 
@@ -13,40 +13,35 @@ def full_path(filename):
     """Returns the full normalised path of a file in the same folder as this module."""
     return normpath(join(dirname(__file__), filename))
 
-MODEL_FILE = full_path('model.pkl')
-
 model = None
-
-def ready():
-    """Returns whether the ML trained model has been loaded from file correctly."""
-    return model is not None # and xxx is not None...
 
 def init():
     """Loads the ML trained model (plus ancillary files) from file."""
     global model
-    if not ready():
-        log.debug('Initialise model from file %s', MODEL_FILE)
-        # deserialise the model from the pickled file
-        model = False
-        # model = joblib.load(MODEL_FILE)
-        # deserialise other pickled objects e.g. feature_list, feature_selector
+    log.debug('Initialise model from file %s', full_path('model.pkl'))
+    # deserialise the ML model (and possibly other objects such as feature_list, 
+    # feature_selector) from pickle file(s)
+    model = False
+    # model = joblib.load(full_path('model.pkl'))
+    # feature_list = joblib.load(full_path('feature_list.pkl'))
+    # feature_selector = joblib.load(full_path('feature_selector.pkl'))
 
-def run(data):
+def run(input_data):
     """Makes a prediction using the trained ML model."""
-    test = data if isinstance(data, pd.DataFrame) else pd.DataFrame(data, index=[0])
-    test = pd.get_dummies(test)
+    data = input_data if isinstance(input_data, pd.DataFrame) else pd.DataFrame(input_data, index=[0])
 
-    # make the necessary transformations from other pickled objects, e.g.
-    #     test = pd.get_dummies(test)
-    #     test.reindex(columns=feature_list, fill_value=0)
-    #     test = feature_selector.transform(test)
+    # make the necessary transformations using pickled objects, e.g.
+    #  data = pd.get_dummies(data)
+    #  data.reindex(columns=feature_list, fill_value=0)
+    #  data = feature_selector.transform(data)
 
-    # make (or mock) a prediction
-    prediction = np.asarray(['test_prediction'])
-    # prediction = model.predict(test)
+    # then make (or mock) a prediction
+    #  prediction = model.predict(data)
+
+    prediction = np.asarray(['mock_prediction'])
     if isinstance(prediction, np.ndarray):
         prediction = prediction.tolist()
-    log.info('Data:%s - Prediction:%s', data, prediction)
+    log.info('input_data:%s - prediction:%s', input_data, prediction)
     return prediction
 
 def sample():
