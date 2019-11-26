@@ -28,11 +28,12 @@ def init():
 
 def run(input_data):
     """Makes a prediction using the trained ML model."""
+    log.info('input_data:%s', input_data)
     data = input_data if isinstance(input_data, pd.DataFrame) else pd.DataFrame(input_data, index=[0])
 
     # make the necessary transformations using pickled objects, e.g.
     #  data = pd.get_dummies(data)
-    #  data.reindex(columns=feature_list, fill_value=0)
+    #  data = data.reindex(columns=feature_list, fill_value=0)
     #  data = feature_selector.transform(data)
 
     # then make (or mock) a prediction
