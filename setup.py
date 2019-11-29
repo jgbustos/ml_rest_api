@@ -27,6 +27,7 @@ setup(
 
     install_requires=['Flask>=1.0',
                       'flask-restplus>=0.11.0',
+                      'strict-rfc3339>=0.7'
                       'numpy>=1.15.0',
                       'scipy>=1.2.0',
                       'pandas>=0.23.0',

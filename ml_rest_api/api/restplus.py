@@ -1,5 +1,6 @@
 """Module that creates the Api object and declares default error handler."""
 import logging
+from jsonschema import FormatChecker
 from http import HTTPStatus
 from flask_restplus import Api
 from ml_rest_api.settings import get_value
@@ -10,6 +11,7 @@ api = Api(version='0.1',
           title='Machine Learning REST API',
           description='A RESTful API to return predictions from a trained ML model, \
           built with Python 3 and Flask-RESTplus',
+          format_checker=FormatChecker(formats=("date-time","date",)),
           default='health',
           default_label='Basic health check methods',)
 

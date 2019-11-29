@@ -51,7 +51,7 @@ def sample():
             "string_param":"foobar",
             "float_param":0.1,
             "bool_param":True,
-            "datetime_param":datetime.now().isoformat(),
+            "datetime_param":datetime.now().isoformat() + 'Z',
             "date_param":date.today().isoformat(),}
 
 if __name__ == "__main__":

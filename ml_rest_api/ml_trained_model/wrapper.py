@@ -62,7 +62,7 @@ class TrainedModelWrapper:
            
     def init(self):
         """Calls the wrapped init() method if it's assigned."""
-        if self._init:
+        if self._init and not self.initialised:
             self._init()
             self.initialised = True
 
