@@ -4,11 +4,11 @@ FROM python:3.6-slim-buster
 
 LABEL maintainer="j.garciadebustos@godeltech.com"
 
-RUN pip install --upgrade pip \
- && pip install -r requirements.txt
-
 COPY . /app
 WORKDIR /app
+
+RUN pip install --upgrade pip \
+ && pip install -r requirements.txt
 
 EXPOSE 8888
 
