@@ -1,7 +1,11 @@
-# this is our own base image
-FROM jgbustos/ml-model-base:latest
+# This is an official Python runtime, used as the parent image
+# Python 3.6 on Debian "Buster"
+FROM python:3.6-slim-buster
 
 LABEL maintainer="j.garciadebustos@godeltech.com"
+
+RUN pip install --upgrade pip \
+ && pip install -r requirements.txt
 
 COPY . /app
 WORKDIR /app
