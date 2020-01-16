@@ -20,17 +20,23 @@ class TrainedModelWrapper:
         self.module = None
 
     def load(self, module_name):
-        """Loads a Python module, finding the init, run and sample callable methods."""
+        """Loads a Python module, binding the init, run and sample callable methods."""
+
+        def bind_funct(funct_name):
+            """Binds a named attibute if it exists and it's callable"""
+            if hasattr(self.module, funct_name):
+                funct = getattr(self.module, funct_name)
+                if callable(funct):
+                    return funct
+            return None
+
         self.module_name, _ = os.path.splitext(module_name)
         self.module = importlib.import_module(
             "ml_rest_api.ml_trained_model." + self.module_name
         )
-        if hasattr(self.module, "init") and callable(getattr(self.module, "init")):
-            self._init = getattr(self.module, "init")
-        if hasattr(self.module, "run") and callable(getattr(self.module, "run")):
-            self._run = getattr(self.module, "run")
-        if hasattr(self.module, "sample") and callable(getattr(self.module, "sample")):
-            self._sample = getattr(self.module, "sample")
+        self._init = bind_funct("init")
+        self._run = bind_funct("run")
+        self._sample = bind_funct("sample")
 
     @staticmethod
     def find_first_module():
