@@ -9,37 +9,44 @@ from ml_rest_api.ml_trained_model.wrapper import trained_model_wrapper
 
 log = logging.getLogger(__name__)
 
-fields_classes = {
-    "str": fields.String,
-    "int": fields.Integer,
-    "float": fields.Float,
-    "bool": fields.Boolean,
-    "datetime": fields.DateTime,
-    "date": fields.Date,
-}
-data_point_dict = {}
-data_sample = trained_model_wrapper.sample()
-if data_sample is not None:
-    for key, value in data_sample.items():
-        fields_class = fields_classes.get(type(value).__name__, fields.String)
-        if type(value).__name__ == "str":
-            try:
-                parse_date(value)
-                fields_class = fields.Date
-            except ValueError:
-                pass
-            try:
-                parse_datetime(value)
-                fields_class = fields.DateTime
-            except ValueError:
-                pass
-        data_point_dict[key] = fields_class(example=value, readonly=True, required=True)
-data_point = api.model("data_point", data_point_dict)
+
+def build_api_model():
+    """
+    Returns a RESTplus Api Model built based on the sample dict returned by the trained model wrapper. 
+    This will be used to validate input and automatically generate the Swagger prototype.
+    """
+    fields_classes_map = {
+        "str": fields.String,
+        "int": fields.Integer,
+        "float": fields.Float,
+        "bool": fields.Boolean,
+        "datetime": fields.DateTime,
+        "date": fields.Date,
+    }
+    model_dict = {}
+    model_sample = trained_model_wrapper.sample()
+    if model_sample is not None:
+        for key, value in model_sample.items():
+            fields_class = fields_classes_map.get(type(value).__name__, fields.String)
+            if type(value).__name__ == "str":
+                try:
+                    parse_date(value)
+                    fields_class = fields.Date
+                except ValueError:
+                    pass
+                try:
+                    parse_datetime(value)
+                    fields_class = fields.DateTime
+                except ValueError:
+                    pass
+            model_dict[key] = fields_class(example=value, readonly=True, required=True)
+    return api.model("input_vector", model_dict)
+
 
 ns = api.namespace(
     "model",
     description="Methods supported by our ML model",
-    validate=(data_sample is not None),
+    validate=(trained_model_wrapper.sample() is not None),
 )
 
 
@@ -48,7 +55,7 @@ class ModelPredict(Resource):
     """Implements the /model/predict POST method."""
 
     @staticmethod
-    @api.expect(data_point)
+    @api.expect(build_api_model())
     @api.doc(
         responses={
             HTTPStatus.OK: "Success",
