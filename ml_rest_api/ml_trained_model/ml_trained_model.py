@@ -50,7 +50,7 @@ def run(input_data):
     prediction = np.asarray(["mock_prediction"])
     if isinstance(prediction, np.ndarray):
         prediction = prediction.tolist()
-    log.info("input_data:%s - prediction:%s", input_data, prediction)
+    log.info("data:%s - prediction:%s", data.values[0], prediction)
     return prediction
 
 
