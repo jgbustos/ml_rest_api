@@ -3,8 +3,6 @@ import os
 import sys
 import logging.config
 
-sys.path.append(os.path.normpath(os.path.join(os.path.dirname(__file__), "../")))
-
 from flask import Flask, Blueprint
 from ml_rest_api.settings import get_value
 from ml_rest_api.ml_trained_model.wrapper import trained_model_wrapper
