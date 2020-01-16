@@ -10,19 +10,19 @@ from ml_rest_api.ml_trained_model.wrapper import trained_model_wrapper
 log = logging.getLogger(__name__)
 
 fields_classes = {
-    'str': fields.String,
-    'int': fields.Integer,
-    'float': fields.Float,
-    'bool': fields.Boolean,
-    'datetime': fields.DateTime,
-    'date': fields.Date,
+    "str": fields.String,
+    "int": fields.Integer,
+    "float": fields.Float,
+    "bool": fields.Boolean,
+    "datetime": fields.DateTime,
+    "date": fields.Date,
 }
 data_point_dict = {}
 data_sample = trained_model_wrapper.sample()
 if data_sample is not None:
     for key, value in data_sample.items():
         fields_class = fields_classes.get(type(value).__name__, fields.String)
-        if type(value).__name__ == 'str':
+        if type(value).__name__ == "str":
             try:
                 parse_date(value)
                 fields_class = fields.Date
@@ -34,22 +34,28 @@ if data_sample is not None:
             except ValueError:
                 pass
         data_point_dict[key] = fields_class(example=value, readonly=True, required=True)
-data_point = api.model('data_point', data_point_dict)
+data_point = api.model("data_point", data_point_dict)
 
-ns = api.namespace('model', description='Methods supported by our ML model',
-                   validate=(data_sample is not None))
+ns = api.namespace(
+    "model",
+    description="Methods supported by our ML model",
+    validate=(data_sample is not None),
+)
 
-@ns.route('/predict')
+
+@ns.route("/predict")
 class ModelPredict(Resource):
     """Implements the /model/predict POST method."""
 
     @staticmethod
     @api.expect(data_point)
-    @api.doc(responses={
-        HTTPStatus.OK: 'Success',
-        HTTPStatus.BAD_REQUEST: 'Input Validation Error',
-        HTTPStatus.INTERNAL_SERVER_ERROR: 'Server Not Ready',
-    })
+    @api.doc(
+        responses={
+            HTTPStatus.OK: "Success",
+            HTTPStatus.BAD_REQUEST: "Input Validation Error",
+            HTTPStatus.INTERNAL_SERVER_ERROR: "Server Not Ready",
+        }
+    )
     def post():
         """
         Returns a prediction using the model.
@@ -58,4 +64,4 @@ class ModelPredict(Resource):
             data = dict(request.json)
             ret = trained_model_wrapper.run(data)
             return ret, HTTPStatus.OK
-        return 'Not Ready', HTTPStatus.INTERNAL_SERVER_ERROR
+        return "Not Ready", HTTPStatus.INTERNAL_SERVER_ERROR
