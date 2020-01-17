@@ -18,5 +18,7 @@ def get_value(key):
         "SWAGGER_UI_JSONEDITOR": True,
         # Trained ML/AI model settings
         "TRAINED_MODEL_MODULE_NAME": "ml_trained_model",
+        # Module settings
+        "MULTITHREADED_INIT": True,
     }
     return os.environ[key] if key in os.environ else settings.get(key, False)
