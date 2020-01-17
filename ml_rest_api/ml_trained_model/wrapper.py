@@ -4,6 +4,9 @@ import os.path
 import importlib
 from threading import Thread
 from ml_rest_api.settings import get_value
+from typing import Union, Iterable, Callable, Dict
+
+WrapperCallableType = Union[Callable, None]
 
 
 class TrainedModelWrapper:
@@ -12,20 +15,20 @@ class TrainedModelWrapper:
 
     def __init__(self):
         """Initialise everything to None, particularly init, run, sample and ready methods."""
-        self._init = None
-        self._run = None
-        self._sample = None
-        self.initialised = False
-        self.module_name = None
+        self._init: WrapperCallableType = None
+        self._run: WrapperCallableType = None
+        self._sample: WrapperCallableType = None
+        self.initialised: bool = False
+        self.module_name: str = None
         self.module = None
 
-    def load(self, module_name):
+    def load(self, module_name: str) -> None:
         """Loads a Python module, binding the init, run and sample callable methods."""
 
-        def bind_funct(funct_name):
-            """Binds a named attibute if it exists and it's callable"""
-            if hasattr(self.module, funct_name):
-                funct = getattr(self.module, funct_name)
+        def find_callable(callable_name: str) -> WrapperCallableType:
+            """Returns a named attibute if it exists and it's callable"""
+            if hasattr(self.module, callable_name):
+                funct = getattr(self.module, callable_name)
                 if callable(funct):
                     return funct
             return None
@@ -34,12 +37,12 @@ class TrainedModelWrapper:
         self.module = importlib.import_module(
             "ml_rest_api.ml_trained_model." + self.module_name
         )
-        self._init = bind_funct("init")
-        self._run = bind_funct("run")
-        self._sample = bind_funct("sample")
+        self._init = find_callable("init")
+        self._run = find_callable("run")
+        self._sample = find_callable("sample")
 
     @staticmethod
-    def find_first_module():
+    def find_first_module() -> str:
         """Finds first available module (the first Python module found in the current dir that is
         not this wrapper or starts with __). Returns the name minus .py extension"""
         for filename in os.listdir(os.path.dirname(__file__)):
@@ -51,44 +54,44 @@ class TrainedModelWrapper:
                 module, extension = os.path.splitext(filename)
                 if extension == ".py":
                     return module
-        return None
+        return ""
 
-    def load_default_module(self):
+    def load_default_module(self) -> None:
         """Loads a module, chosen either by getting the name from TRAINED_MODEL_MODULE_NAME env var
         or from the settings file. If module is not found in env var or settings, find it by calling
         load_first_module()"""
-        env_model_name = get_value("TRAINED_MODEL_MODULE_NAME")
+        env_model_name: str = get_value("TRAINED_MODEL_MODULE_NAME")
         if not env_model_name:
             env_model_name = self.find_first_module()
         if env_model_name:
             self.load(env_model_name)
 
-    def ready(self):
+    def ready(self) -> bool:
         """Returns wther the model it's correctly initialised and a wrapped run() method can be called"""
-        return self._run and self.initialised
+        return bool(self._run) and self.initialised
 
-    def multithreaded_init(self):
+    def multithreaded_init(self) -> None:
         """Calls self.init() to load the model in a separate thread."""
         if self._init:
             Thread(target=self.init).start()
 
-    def init(self):
+    def init(self) -> None:
         """Calls the wrapped init() method if it's assigned."""
         if self._init and not self.initialised:
             self._init()
             self.initialised = True
 
-    def run(self, data):
+    def run(self, data: Iterable) -> Iterable:
         """Calls the wrapped run() method if it's assigned."""
         if self._run:
             return self._run(data)
-        return None
+        return []
 
-    def sample(self):
+    def sample(self) -> Dict:
         """Calls the wrapped sample() method if it's assigned."""
         if self._sample:
             return self._sample()
-        return None
+        return {}
 
 
 trained_model_wrapper = TrainedModelWrapper()

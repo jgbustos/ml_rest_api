@@ -1,11 +1,14 @@
 """Module that creates the Api object and declares default error handler."""
-import logging
+from logging import Logger, getLogger
 from jsonschema import FormatChecker
 from http import HTTPStatus
 from flask_restplus import Api
 from ml_rest_api.settings import get_value
+from typing import Tuple, Iterable
 
-log = logging.getLogger(__name__)
+FlaskApiReturnType = Tuple[Iterable, HTTPStatus]
+
+log: Logger = getLogger(__name__)
 
 api = Api(
     version="0.1",
@@ -19,7 +22,7 @@ api = Api(
 
 
 @api.errorhandler
-def default_error_handler(exception):
+def default_error_handler(exception) -> FlaskApiReturnType:
     """Default error handler that returns HTTP 500 error."""
     log.exception(exception.message)
     if get_value("FLASK_DEBUG"):

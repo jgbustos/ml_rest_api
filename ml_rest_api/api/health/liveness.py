@@ -1,7 +1,7 @@
 """This module implements the HealthLiveness class."""
 from http import HTTPStatus
 from flask_restplus import Resource
-from ml_rest_api.api.restplus import api
+from ml_rest_api.api.restplus import api, FlaskApiReturnType
 
 
 @api.default_namespace.route("/liveness")
@@ -12,7 +12,7 @@ class HealthLiveness(Resource):
     @api.doc(
         responses={HTTPStatus.OK: "Success",}
     )
-    def get():
+    def get() -> FlaskApiReturnType:
         """
         Returns liveness status.
         """

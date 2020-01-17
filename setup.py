@@ -32,5 +32,6 @@ setup(
         "tensorflow>=1.12.0",
         "keras>=2.2.0",
         "nltk>=3.3",
+        "mypy>=0.760",
     ],
 )

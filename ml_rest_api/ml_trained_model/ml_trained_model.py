@@ -1,24 +1,25 @@
 # coding: utf-8
 """Module that does all the ML trained model prediction heavy lifting."""
-import logging
+from logging import Logger, getLogger
 from datetime import datetime, date
 from os.path import normpath, join, dirname
 import numpy as np
 import pandas as pd
 import joblib
+from typing import Any, Iterable, Dict
 
-log = logging.getLogger(__name__)
+log: Logger = getLogger(__name__)
 
 
-def full_path(filename):
+def full_path(filename: str) -> str:
     """Returns the full normalised path of a file in the same folder as this module."""
     return normpath(join(dirname(__file__), filename))
 
 
-model = None
+model: Any = None
 
 
-def init():
+def init() -> None:
     """Loads the ML trained model (plus ancillary files) from file."""
     global model
     log.debug("Initialise model from file %s", full_path("model.pkl"))
@@ -30,10 +31,10 @@ def init():
     # feature_selector = joblib.load(full_path('feature_selector.pkl'))
 
 
-def run(input_data):
+def run(input_data: Iterable) -> Iterable:
     """Makes a prediction using the trained ML model."""
     log.info("input_data:%s", input_data)
-    data = (
+    data: pd.DataFrame = (
         input_data
         if isinstance(input_data, pd.DataFrame)
         else pd.DataFrame(input_data, index=[0])
@@ -47,14 +48,14 @@ def run(input_data):
     # then make (or mock) a prediction
     #  prediction = model.predict(data)
 
-    prediction = np.asarray(["mock_prediction"])
+    prediction: Iterable = np.asarray(["mock_prediction"])
     if isinstance(prediction, np.ndarray):
         prediction = prediction.tolist()
     log.info("data:%s - prediction:%s", data.values[0], prediction)
     return prediction
 
 
-def sample():
+def sample() -> Dict:
     """Returns a sample input vector as a dictionary."""
     return {
         "int_param": 10,

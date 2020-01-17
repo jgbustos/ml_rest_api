@@ -1,10 +1,11 @@
 """Settings file."""
 import os
+from typing import Any, Dict
 
 
-def get_value(key):
+def get_value(key: str) -> Any:
     """Returns a value from the corresponding env var or from settings if env var doesn't exist."""
-    settings = {
+    settings: Dict = {
         # Flask settings
         "FLASK_SERVER_NAME": "localhost:8888",
         "FLASK_HOST": "0.0.0.0",
