@@ -8,7 +8,7 @@ First, open a command line interface and clone the GitHub repo in your workspace
 
 ```Powershell
 PS > cd $WORKSPACE_PATH$
-PS > git clone https://github.com/jgbustos/ml_rest_api
+PS > git clone https://github.com/GodelTech/ml_rest_api
 PS > cd ml_rest_api
 ```
 
