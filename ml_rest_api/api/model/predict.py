@@ -23,7 +23,7 @@ def build_api_model() -> Model:
     }
     model_dict: Dict = {}
     model_sample: Dict = trained_model_wrapper.sample()
-    if model_sample is not None:
+    if model_sample:
         for key, value in model_sample.items():
             fields_class: fields.Raw = fields_classes_map.get(
                 type(value).__name__, fields.String
@@ -46,7 +46,7 @@ def build_api_model() -> Model:
 ns = api.namespace(
     "model",
     description="Methods supported by our ML model",
-    validate=(trained_model_wrapper.sample() is not None),
+    validate=bool(trained_model_wrapper.sample()),
 )
 
 
