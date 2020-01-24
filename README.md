@@ -95,12 +95,12 @@ The trained ML model is meant to be initialised and invoked to make predictions 
 
 ## Build automation
 
-This project is built into a Docker image using the Docker Hub automated build at <https://hub.docker.com/r/jgbustos/ml-rest-api/>
+This project is built into a Docker image using the Docker Hub automated build at <https://hub.docker.com/r/godeltech/ml-rest-api/>
 
 ## Running the Docker container
 
 ```Powershell
-> docker run -d -p8888:8888 jgbustos/ml-rest-api:latest
+> docker run -d -p8888:8888 godeltech/ml-rest-api:latest
 ```
 
 Open the URL <http://localhost:8888/api/> with your browser and see the sample Swagger documentation
