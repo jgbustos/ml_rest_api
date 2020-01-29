@@ -1,5 +1,7 @@
 # ml_rest_api
 
+![CircleCI](https://img.shields.io/circleci/build/github/GodelTech/ml_rest_api/master)
+
 A RESTful API to return predictions from a trained ML model, built with Python 3 and Flask-RESTplus
 
 ## Development set-up instructions
