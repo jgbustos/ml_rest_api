@@ -1,24 +1,21 @@
 """This module is the RESTful service entry point."""
 import os
-import sys
 from logging import Logger, getLogger
 import logging.config
+from typing import List
 from flask import Flask, Blueprint
 from ml_rest_api.settings import get_value
 from ml_rest_api.ml_trained_model.wrapper import trained_model_wrapper
-from ml_rest_api.api.health.liveness import HealthLiveness
-from ml_rest_api.api.health.readiness import HealthReadiness
-import ml_rest_api.api.model.predict
 from ml_rest_api.api.restplus import api
-from typing import List
+import ml_rest_api.api.health.liveness  # pylint: disable=unused-import
+import ml_rest_api.api.health.readiness  # pylint: disable=unused-import
+import ml_rest_api.api.model.predict  # pylint: disable=unused-import
 
-IN_UWSGI: bool = False
+IN_UWSGI: bool = True
 try:
-    import uwsgi
-
-    IN_UWSGI = True
+    import uwsgi  # pylint: disable=unused-import
 except ImportError:
-    None
+    IN_UWSGI = False
 
 
 def configure_app(flask_app: Flask) -> None:
@@ -53,19 +50,19 @@ def main() -> None:
         "***** Starting development server at http://%s/api/ *****",
         get_value("FLASK_SERVER_NAME"),
     )
-    app.run(
+    APP.run(
         debug=get_value("FLASK_DEBUG"),
         port=get_value("FLASK_PORT"),
         host=get_value("FLASK_HOST"),
     )
 
 
-app = Flask(__name__)
+APP = Flask(__name__)
 logging.config.fileConfig(
     os.path.normpath(os.path.join(os.path.dirname(__file__), "../logging.conf"))
 )
 log: Logger = getLogger(__name__)
-initialize_app(app)
+initialize_app(APP)
 
 if __name__ == "__main__":
     main()

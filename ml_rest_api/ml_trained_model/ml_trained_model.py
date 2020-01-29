@@ -3,10 +3,10 @@
 from logging import Logger, getLogger
 from datetime import datetime, date
 from os.path import normpath, join, dirname
+from typing import Any, Iterable, Dict
 import numpy as np
 import pandas as pd
-import joblib
-from typing import Any, Iterable, Dict
+import joblib  # pylint: disable=unused-import
 
 log: Logger = getLogger(__name__)
 
@@ -16,19 +16,19 @@ def full_path(filename: str) -> str:
     return normpath(join(dirname(__file__), filename))
 
 
-model: Any = None
+MODEL: Any = None
 
 
 def init() -> None:
     """Loads the ML trained model (plus ancillary files) from file."""
-    global model
     log.debug("Initialise model from file %s", full_path("model.pkl"))
+
     # deserialise the ML model (and possibly other objects such as feature_list,
-    # feature_selector) from pickle file(s)
-    model = False
-    # model = joblib.load(full_path('model.pkl'))
-    # feature_list = joblib.load(full_path('feature_list.pkl'))
-    # feature_selector = joblib.load(full_path('feature_selector.pkl'))
+    # feature_selector) from pickle file(s):
+    #  global MODEL
+    #  MODEL = joblib.load(full_path('model.pkl'))
+    #  feature_list = joblib.load(full_path('feature_list.pkl'))
+    #  feature_selector = joblib.load(full_path('feature_selector.pkl'))
 
 
 def run(input_data: Iterable) -> Iterable:
@@ -46,7 +46,7 @@ def run(input_data: Iterable) -> Iterable:
     #  data = feature_selector.transform(data)
 
     # then make (or mock) a prediction
-    #  prediction = model.predict(data)
+    #  prediction = MODEL.predict(data)
 
     prediction: Iterable = np.asarray(["mock_prediction"])
     if isinstance(prediction, np.ndarray):

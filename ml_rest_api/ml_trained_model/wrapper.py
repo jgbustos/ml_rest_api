@@ -3,8 +3,8 @@ import os
 import os.path
 import importlib
 from threading import Thread
-from ml_rest_api.settings import get_value
 from typing import Union, Iterable, Callable, Dict
+from ml_rest_api.settings import get_value
 
 WrapperCallableType = Union[Callable, None]
 
@@ -46,14 +46,15 @@ class TrainedModelWrapper:
         """Finds first available module (the first Python module found in the current dir that is
         not this wrapper or starts with __). Returns the name minus .py extension"""
         for filename in os.listdir(os.path.dirname(__file__)):
-            if (
-                len(filename) >= 2
-                and filename[0:2] != "__"
-                and filename != os.path.basename(__file__)
-            ):
-                module, extension = os.path.splitext(filename)
-                if extension == ".py":
-                    return module
+            if len(filename) < 2:
+                continue  # too short a filename
+            if filename[0:2] == "__":
+                continue  # ignore __init__,py and similar
+            if filename == os.path.basename(__file__):
+                continue  # ignore this very module
+            module, extension = os.path.splitext(filename)
+            if extension == ".py":
+                return module
         return ""
 
     def load_default_module(self) -> None:
@@ -67,7 +68,7 @@ class TrainedModelWrapper:
             self.load(env_model_name)
 
     def ready(self) -> bool:
-        """Returns wther the model it's correctly initialised and a wrapped run() method can be called"""
+        """Returns whether the model was initialised and a wrapped run() method can be called"""
         return bool(self._run) and self.initialised
 
     def multithreaded_init(self) -> None:
@@ -94,5 +95,5 @@ class TrainedModelWrapper:
         return {}
 
 
-trained_model_wrapper = TrainedModelWrapper()
+trained_model_wrapper = TrainedModelWrapper()  # pylint: disable=invalid-name
 trained_model_wrapper.load_default_module()
