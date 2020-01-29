@@ -32,13 +32,25 @@ jobs:
           command: |
             python3 -m venv venv
             . venv/bin/activate
-            pip install --upgrade pip
-            pip install -r requirements.txt
+            pip install --progress-bar=off --upgrade pip
+            pip install --progress-bar=off -r requirements.txt
 
       - save_cache:
           paths:
             - ./venv
           key: v1-dependencies-{{ checksum "requirements.txt" }}
+
+      - run:
+          name: mypy type hint checks
+          command: |
+            pip install --progress-bar=off mypy==0.761
+            mypy --pretty --config-file=mypy.ini ml_rest_api
+
+      - run:
+          name: black formatter checks
+          command: |
+            pip install --progress-bar=off black==black==19.10b0
+            black --check ml_rest_api
 
       # run tests!
       # this example uses Django's built-in test-runner
