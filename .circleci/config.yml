@@ -43,12 +43,12 @@ jobs:
       - run:
           name: mypy type hint checks
           command: |
-            mypy --pretty --config-file=mypy.ini ml_rest_api
+            python3 -m mypy --pretty --config-file=mypy.ini ml_rest_api
 
       - run:
           name: black formatter checks
           command: |
-            black --check ml_rest_api
+            python3 -m black --check ml_rest_api
 
       # run tests!
       # this example uses Django's built-in test-runner
