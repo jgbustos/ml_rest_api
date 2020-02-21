@@ -1,7 +1,6 @@
 """This module implements the HealthReadiness class."""
-from http import HTTPStatus
-from flask_restplus import Resource
-from ml_rest_api.api.restplus import api, FlaskApiReturnType
+from flask_restx import Resource
+from ml_rest_api.api.restx import api, FlaskApiReturnType
 from ml_rest_api.ml_trained_model.wrapper import trained_model_wrapper
 
 
@@ -11,15 +10,12 @@ class HealthReadiness(Resource):
 
     @staticmethod
     @api.doc(
-        responses={
-            HTTPStatus.OK: "Success",
-            HTTPStatus.INTERNAL_SERVER_ERROR: "Server Not Ready",
-        }
+        responses={200: "Success", 500: "Server Not Ready",}
     )
     def get() -> FlaskApiReturnType:
         """
         Returns readiness status
         """
         if trained_model_wrapper.ready():
-            return "Ready", HTTPStatus.OK
-        return "Not Ready", HTTPStatus.INTERNAL_SERVER_ERROR
+            return "Ready", 200
+        return "Not Ready", 500

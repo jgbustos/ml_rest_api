@@ -1,16 +1,15 @@
 """This module implements the ModelPredict class."""
-from http import HTTPStatus
 from typing import Dict
 from aniso8601 import parse_date, parse_datetime
 from flask import request
-from flask_restplus import Resource, Model, fields
-from ml_rest_api.api.restplus import api, FlaskApiReturnType
+from flask_restx import Resource, Model, fields
+from ml_rest_api.api.restx import api, FlaskApiReturnType
 from ml_rest_api.ml_trained_model.wrapper import trained_model_wrapper
 
 
 def build_api_model() -> Model:
     """
-    Returns a RESTplus Api Model based on the sample dict returned by the trained model wrapper.
+    Returns a Flask-RESTX Api Model based on the sample dict returned by the trained model wrapper.
     This will be used to validate input and automatically generate the Swagger prototype.
     """
     fields_classes_map: Dict = {
@@ -58,9 +57,9 @@ class ModelPredict(Resource):
     @api.expect(build_api_model())
     @api.doc(
         responses={
-            HTTPStatus.OK: "Success",
-            HTTPStatus.BAD_REQUEST: "Input Validation Error",
-            HTTPStatus.INTERNAL_SERVER_ERROR: "Server Not Ready",
+            200: "Success",
+            400: "Input Validation Error",
+            500: "Server Not Ready",
         }
     )
     def post() -> FlaskApiReturnType:
@@ -70,5 +69,5 @@ class ModelPredict(Resource):
         if trained_model_wrapper.ready():
             data = dict(request.json)
             ret = trained_model_wrapper.run(data)
-            return ret, HTTPStatus.OK
-        return "Not Ready", HTTPStatus.INTERNAL_SERVER_ERROR
+            return ret, 200
+        return "Not Ready", 500

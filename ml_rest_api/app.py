@@ -6,7 +6,7 @@ from typing import List
 from flask import Flask, Blueprint
 from ml_rest_api.settings import get_value
 from ml_rest_api.ml_trained_model.wrapper import trained_model_wrapper
-from ml_rest_api.api.restplus import api
+from ml_rest_api.api.restx import api
 import ml_rest_api.api.health.liveness  # pylint: disable=unused-import
 import ml_rest_api.api.health.readiness  # pylint: disable=unused-import
 import ml_rest_api.api.model.predict  # pylint: disable=unused-import
@@ -23,8 +23,8 @@ def configure_app(flask_app: Flask) -> None:
     flask_settings_to_apply: List = [
         #'FLASK_SERVER_NAME',
         "SWAGGER_UI_DOC_EXPANSION",
-        "RESTPLUS_VALIDATE",
-        "RESTPLUS_MASK_SWAGGER",
+        "RESTX_VALIDATE",
+        "RESTX_MASK_SWAGGER",
         "SWAGGER_UI_JSONEDITOR",
         "ERROR_404_HELP",
     ]

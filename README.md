@@ -4,7 +4,7 @@
 ![Docker Cloud Automated build](https://img.shields.io/docker/cloud/automated/godeltech/ml-rest-api)
 ![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/godeltech/ml-rest-api)
 
-A RESTful API to return predictions from a trained ML model, built with Python 3 and Flask-RESTplus
+A RESTful API to return predictions from a trained ML model, built with Python 3 and Flask-RESTX
 
 ## Development set-up instructions
 
@@ -68,10 +68,10 @@ settings = {
     'FLASK_PORT': 8888,
     'FLASK_DEBUG': True,
 
-    # Flask-Restplus settings
+    # Flask-RESTX settings
     'SWAGGER_UI_DOC_EXPANSION': 'list',
-    'RESTPLUS_VALIDATE': True,
-    'RESTPLUS_MASK_SWAGGER': False,
+    'RESTX_VALIDATE': True,
+    'RESTX_MASK_SWAGGER': False,
     'ERROR_404_HELP': False,
     'SWAGGER_UI_JSONEDITOR': True,
 
@@ -86,10 +86,10 @@ settings = {
 | FLASK_HOST | e.g.: 0.0.0.0 | Leave as 0.0.0.0 to avoid virtual host filtering |
 | FLASK_PORT | e.g.: 8888 | Choose whatever suits you, go crazy |
 | FLASK_DEBUG | False/True | Do not use debug mode in production |
-| SWAGGER_UI_DOC_EXPANSION | 'none', 'list' or 'full' | Explained here: <https://flask-restplus.readthedocs.io/en/stable/swagger.html> |
-| RESTPLUS_VALIDATE | False/True | Explained here: <https://flask-restplus.readthedocs.io/en/stable/swagger.html> |
-| RESTPLUS_MASK_SWAGGER | False/True | Explained here: <https://flask-restplus.readthedocs.io/en/stable/mask.html> |
-| ERROR_404_HELP | False/True | Explained here: <https://flask-restplus.readthedocs.io/en/stable/quickstart.html> |
+| SWAGGER_UI_DOC_EXPANSION | 'none', 'list' or 'full' | Explained here: <https://flask-restx.readthedocs.io/en/stable/swagger.html#customization> |
+| RESTX_VALIDATE | False/True | Explained here: <https://flask-restx.readthedocs.io/en/stable/swagger.html#the-api-expect-decorator> |
+| RESTX_MASK_SWAGGER | False/True | Explained here: <https://flask-restx.readthedocs.io/en/stable/mask.html#usage> |
+| ERROR_404_HELP | False/True | Explained here: <https://flask-restx.readthedocs.io/en/stable/quickstart.html#endpoints> |
 | SWAGGER_UI_JSONEDITOR | False/True | Enable a JSON editor in the Swagger interface |
 | TRAINED_MODEL_MODULE_NAME | e.g.: ml_trained_model | Name of the Python module that initialises the ML model and returns predictions (see [section below](#setting-up-the-model)) |
 
