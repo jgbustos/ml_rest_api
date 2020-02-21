@@ -1,8 +1,8 @@
 # ml_rest_api
 
 [![CircleCI](https://img.shields.io/circleci/build/github/GodelTech/ml_rest_api/master?logo=CircleCI&label=CircleCI%20build)](https://circleci.com/gh/GodelTech/ml_rest_api)
-[![Docker Cloud Automated build](https://img.shields.io/docker/cloud/automated/godeltech/ml-rest-api?logo=Docker)](https://hub.docker.com/r/godeltech/ml-rest-api/builds)
-[![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/godeltech/ml-rest-api?logo=Docker)](https://hub.docker.com/r/godeltech/ml-rest-api/builds)
+[![Docker Cloud Automated build](https://img.shields.io/docker/cloud/automated/godeltech/ml-rest-api?logo=Docker&logoColor=white)](https://hub.docker.com/r/godeltech/ml-rest-api/builds)
+[![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/godeltech/ml-rest-api?logo=Docker&logoColor=white)](https://hub.docker.com/r/godeltech/ml-rest-api/builds)
 
 A RESTful API to return predictions from a trained ML model, built with Python 3 and Flask-RESTX
 
