@@ -75,3 +75,6 @@ jobs:
       #- store_artifacts:
       #    path: test-reports
       #    destination: test-reports
+notify:
+  webhooks:
+    - url: https://outlook.office.com/webhook/8d230079-7597-40f5-97bf-fbebc881c146@d78f2755-3785-4233-9333-cae33ed781c5/CircleCI/19845da4f238402fb7c4d788315fcd31/be3e90f5-94ca-40af-a03c-5eed00932c99
