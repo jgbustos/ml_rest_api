@@ -44,21 +44,21 @@ jobs:
           name: pylint checks
           command: |
             . venv/bin/activate
-            pip install pylint==2.4.4
+            pip install pylint==2.6.0
             python -m pylint ml_rest_api
 
       - run:
           name: mypy type hint checks
           command: |
             . venv/bin/activate
-            pip install mypy==0.761
+            pip install mypy==0.782
             python -m mypy --pretty --config-file=mypy.ini ml_rest_api
 
       - run:
           name: black formatter checks
           command: |
             . venv/bin/activate
-            pip install black==19.10b0
+            pip install black==20.8b1
             python -m black --check ml_rest_api
 
       # run tests!
