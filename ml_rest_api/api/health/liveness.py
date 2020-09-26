@@ -9,7 +9,9 @@ class HealthLiveness(Resource):
 
     @staticmethod
     @api.doc(
-        responses={200: "Success",}
+        responses={
+            200: "Success",
+        }
     )
     def get() -> FlaskApiReturnType:
         """

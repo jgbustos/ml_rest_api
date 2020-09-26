@@ -10,7 +10,10 @@ class HealthReadiness(Resource):
 
     @staticmethod
     @api.doc(
-        responses={200: "Success", 500: "Server Not Ready",}
+        responses={
+            200: "Success",
+            500: "Server Not Ready",
+        }
     )
     def get() -> FlaskApiReturnType:
         """

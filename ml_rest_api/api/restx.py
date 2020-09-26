@@ -14,7 +14,12 @@ api = Api(  # pylint: disable=invalid-name
     title="Machine Learning REST API",
     description="A RESTful API to return predictions from a trained ML model, \
           built with Python 3 and Flask-RESTX",
-    format_checker=FormatChecker(formats=("date-time", "date",)),
+    format_checker=FormatChecker(
+        formats=(
+            "date-time",
+            "date",
+        )
+    ),
     default="health",
     default_label="Basic health check methods",
 )
