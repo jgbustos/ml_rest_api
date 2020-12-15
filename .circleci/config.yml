@@ -52,7 +52,7 @@ jobs:
           name: mypy type hint checks
           command: |
             . venv/bin/activate
-            pip install mypy==0.782
+            pip install mypy==0.790
             python -m mypy --pretty --config-file=mypy.ini ml_rest_api
 
       - run:
