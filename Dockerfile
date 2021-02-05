@@ -1,14 +1,14 @@
 # This is an official Python runtime, used as the parent image
-# Python 3.7 on Debian "Buster"
-FROM python:3.7-slim-buster
+# Python 3.8 on Debian "Buster"
+FROM python:3.8-slim-buster
 
 # Parent image to run under Nginx+uWSGI
-# Python 3.7 on Debian "Stretch"
-# FROM tiangolo/uwsgi-nginx-flask:python3.7
+# Python 3.8 on Debian "Stretch"
+# FROM tiangolo/uwsgi-nginx-flask:python3.8
 
 # Parent image to run under Meinheld+Gunicorn
-# Python 3.7 on Debian "Stretch"
-# FROM tiangolo/meinheld-gunicorn-flask:python3.7
+# Python 3.8 on Debian "Stretch"
+# FROM tiangolo/meinheld-gunicorn-flask:python3.8
 
 LABEL maintainer="j.garciadebustos@godeltech.com"
 
