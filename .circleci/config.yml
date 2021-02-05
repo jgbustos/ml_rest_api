@@ -8,7 +8,7 @@ jobs:
     docker:
       # specify the version you desire here
       # use `-browsers` prefix for selenium tests, e.g. `3.6.1-browsers`
-      - image: circleci/python:3.7
+      - image: circleci/python:3.8
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
@@ -23,7 +23,7 @@ jobs:
       # Download and cache dependencies
       - restore_cache:
           keys:
-            - v1-dependencies-py37-{{ arch }}-{{ checksum "requirements.txt" }}
+            - v1-dependencies-py38-{{ arch }}-{{ checksum "requirements.txt" }}
             # fallback to using the latest cache if no exact match is found
             # - v1-dependencies-
 
@@ -31,7 +31,7 @@ jobs:
           name: install dependencies
           command: |
             python3 -m venv venv
-            . venv/bin/activate
+            . venv/bin/activate 
             pip install --upgrade pip
             pip install --upgrade wheel
             pip install -r requirements.txt
@@ -39,7 +39,7 @@ jobs:
       - save_cache:
           paths:
             - ./venv
-          key: v1-dependencies-py37-{{ arch }}-{{ checksum "requirements.txt" }}
+          key: v1-dependencies-py38-{{ arch }}-{{ checksum "requirements.txt" }}
 
       - run:
           name: pylint checks
@@ -52,7 +52,7 @@ jobs:
           name: mypy type hint checks
           command: |
             . venv/bin/activate
-            pip install mypy==0.790
+            pip install mypy==0.800
             python -m mypy --pretty --config-file=mypy.ini ml_rest_api
 
       - run:
