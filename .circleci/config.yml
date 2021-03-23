@@ -45,14 +45,14 @@ jobs:
           name: pylint checks
           command: |
             . venv/bin/activate
-            pip install pylint==2.6.0
+            pip install pylint==2.7.2
             python -m pylint ml_rest_api
 
       - run:
           name: mypy type hint checks
           command: |
             . venv/bin/activate
-            pip install mypy==0.800
+            pip install mypy==0.812
             python -m mypy --pretty --config-file=mypy.ini ml_rest_api
 
       - run:
@@ -76,6 +76,3 @@ jobs:
       #- store_artifacts:
       #    path: test-reports
       #    destination: test-reports
-notify:
-  webhooks:
-    - url: https://outlook.office.com/webhook/8d230079-7597-40f5-97bf-fbebc881c146@d78f2755-3785-4233-9333-cae33ed781c5/CircleCI/19845da4f238402fb7c4d788315fcd31/be3e90f5-94ca-40af-a03c-5eed00932c99
