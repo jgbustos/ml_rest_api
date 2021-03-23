@@ -1,8 +1,8 @@
 # ml_rest_api
 
-[![CircleCI](https://img.shields.io/circleci/build/github/GodelTech/ml_rest_api/master?logo=CircleCI&label=CircleCI%20build)](https://circleci.com/gh/GodelTech/ml_rest_api)
-[![Docker Cloud Automated build](https://img.shields.io/docker/cloud/automated/godeltech/ml-rest-api?logo=Docker&logoColor=white)](https://hub.docker.com/r/godeltech/ml-rest-api/builds)
-[![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/godeltech/ml-rest-api?logo=Docker&logoColor=white)](https://hub.docker.com/r/godeltech/ml-rest-api/builds)
+[![CircleCI](https://img.shields.io/circleci/build/github/jgbustos/ml_rest_api/master?logo=CircleCI&label=CircleCI%20build)](https://circleci.com/gh/jgbustos/ml_rest_api)
+[![Docker Cloud Automated build](https://img.shields.io/docker/cloud/automated/jgbustos/ml-rest-api?logo=Docker&logoColor=white)](https://hub.docker.com/r/jgbustos/ml-rest-api/builds)
+[![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/jgbustos/ml-rest-api?logo=Docker&logoColor=white)](https://hub.docker.com/r/jgbustos/ml-rest-api/builds)
 
 A RESTful API to return predictions from a trained ML model, built with Python 3 and Flask-RESTX
 
@@ -12,7 +12,7 @@ First, open a command line interface and clone the GitHub repo in your workspace
 
 ```Powershell
 PS > cd $WORKSPACE_PATH$
-PS > git clone https://github.com/GodelTech/ml_rest_api
+PS > git clone https://github.com/jgbustos/ml_rest_api
 PS > cd ml_rest_api
 ```
 
@@ -99,12 +99,12 @@ The trained ML model is meant to be initialised and invoked to make predictions 
 
 ## Build automation
 
-This project is built into a Docker image using the Docker Hub automated build at <https://hub.docker.com/r/godeltech/ml-rest-api/>
+This project is built into a Docker image using the Docker Hub automated build at <https://hub.docker.com/r/jgbustos/ml-rest-api/>
 
 ## Running the Docker container
 
 ```Powershell
-> docker run -d -p8888:8888 godeltech/ml-rest-api:latest
+> docker run -d -p8888:8888 jgbustos/ml-rest-api:latest
 ```
 
 Open the URL <http://localhost:8888/api/> with your browser and see the sample Swagger documentation
