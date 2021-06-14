@@ -1,8 +1,7 @@
 # ml_rest_api
 
 [![CircleCI](https://img.shields.io/circleci/build/github/jgbustos/ml_rest_api/master?logo=CircleCI&label=CircleCI%20build)](https://circleci.com/gh/jgbustos/ml_rest_api)
-[![Docker Cloud Automated build](https://img.shields.io/docker/cloud/automated/jgbustos/ml-rest-api?logo=Docker&logoColor=white)](https://hub.docker.com/r/jgbustos/ml-rest-api/builds)
-[![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/jgbustos/ml-rest-api?logo=Docker&logoColor=white)](https://hub.docker.com/r/jgbustos/ml-rest-api/builds)
+[![Build and publish Docker image](https://github.com/jgbustos/ml_rest_api/actions/workflows/main.yml/badge.svg)](https://github.com/jgbustos/ml_rest_api/actions/workflows/main.yml)
 
 A RESTful API to return predictions from a trained ML model, built with Python 3 and Flask-RESTX
 
