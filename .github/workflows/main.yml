@@ -38,12 +38,5 @@ jobs:
           push: true
           tags: jgbustos/ml-rest-api:latest
       
-      - name: Update repo description
-        uses: peter-evans/dockerhub-description@v2
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-          repository: jgbustos/ml-rest-api
-
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
