@@ -1,6 +1,6 @@
 setuptools>=41.0.0
 Flask==1.1.4
-flask-restx==0.4.0
+flask-restx==0.5.1
 Werkzeug==1.0.1
 strict-rfc3339==0.7
 numpy==1.19.5
