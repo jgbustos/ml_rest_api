@@ -1,4 +1,5 @@
 """This module implements the ModelPredict class."""
+import json
 from typing import Dict
 from aniso8601 import parse_date, parse_datetime
 from flask import request
@@ -67,7 +68,7 @@ class ModelPredict(Resource):
         Returns a prediction using the model.
         """
         if trained_model_wrapper.ready():
-            data = dict(request.json)
+            data = dict(json.loads(request.data))
             ret = trained_model_wrapper.run(data)
             return ret, 200
         return "Not Ready", 500
