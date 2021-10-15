@@ -29,7 +29,7 @@ setup(
         "Flask>=1.0",
         "flask-restx>=0.1.0",
         "werkzeug>=1.0.1",
-        "strict-rfc3339>=0.7",
+        "rfc3339-validator>=0.1.4",
         "numpy>=1.18.0",
         "scipy>=1.4.0",
         "pandas>=1.0.1",
