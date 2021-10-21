@@ -11,12 +11,15 @@ def get_value(key: str) -> Any:
         "FLASK_HOST": "0.0.0.0",
         "FLASK_PORT": 8888,
         "FLASK_DEBUG": True,  # Do not use debug mode in production
+        "SECRET_KEY": b"\xbd~Q\xd8Rg#l\xf9\x96%\x9by\x1f4\xee\xd7\xaaT\x02\xe0\x1eG\x9e",
         # Flask-RESTX settings
         "SWAGGER_UI_DOC_EXPANSION": "list",
         "RESTX_VALIDATE": True,
         "RESTX_MASK_SWAGGER": False,
         "ERROR_404_HELP": False,
         "SWAGGER_UI_JSONEDITOR": True,
+        # Flask-WTF settings
+        "WTF_CSRF_ENABLED": True,
         # Trained ML/AI model settings
         "TRAINED_MODEL_MODULE_NAME": "ml_trained_model",
         # Module settings

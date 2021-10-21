@@ -4,6 +4,7 @@ from logging import Logger, getLogger
 import logging.config
 from typing import List
 from flask import Flask, Blueprint
+from flask_wtf import CSRFProtect  # pylint: disable=unused-import
 from ml_rest_api.settings import get_value
 from ml_rest_api.ml_trained_model.wrapper import trained_model_wrapper
 from ml_rest_api.api.restx import api
@@ -28,6 +29,8 @@ def configure_app(flask_app: Flask) -> None:
         "RESTX_MASK_SWAGGER",
         "SWAGGER_UI_JSONEDITOR",
         "ERROR_404_HELP",
+        "SECRET_KEY",
+        "WTF_CSRF_ENABLED",
     ]
     for key in flask_settings_to_apply:
         flask_app.config[key] = get_value(key)
