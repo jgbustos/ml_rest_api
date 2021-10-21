@@ -28,7 +28,7 @@ setup(
     install_requires=[
         "Flask>=1.0",
         "flask-restx>=0.1.0",
-        "Flask-WTF>=0.15.1"
+        "Flask-WTF>=0.15.1",
         "werkzeug>=1.0.1",
         "rfc3339-validator>=0.1.4",
         "numpy>=1.18.0",
