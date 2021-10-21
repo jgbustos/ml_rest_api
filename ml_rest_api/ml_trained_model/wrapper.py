@@ -3,10 +3,10 @@ import os
 import os.path
 import importlib
 from threading import Thread
-from typing import Union, Iterable, Callable, Dict
+from typing import Optional, Iterable, Callable, Dict
 from ml_rest_api.settings import get_value
 
-WrapperCallableType = Union[Callable, None]
+WrapperCallableType = Optional[Callable]
 
 
 class TrainedModelWrapper:
@@ -19,7 +19,7 @@ class TrainedModelWrapper:
         self._run: WrapperCallableType = None
         self._sample: WrapperCallableType = None
         self.initialised: bool = False
-        self.module_name: str = None
+        self.module_name: Optional[str] = None
         self.module = None
 
     def load(self, module_name: str) -> None:

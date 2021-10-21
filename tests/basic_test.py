@@ -27,6 +27,9 @@ GOOD_JSON_DICT = {
 }
 REQUEST_TIMEOUT = 0.1  # 100 milliseconds, life is too short
 
+NOT_A_DATETIME_MSG = "is not a 'date-time'"
+NOT_A_DATE_MSG = "is not a 'date'"
+
 
 def _get_request(url):
     response = requests.get(
@@ -222,7 +225,7 @@ def test_post_model_predict_datetime_param_missing_z_status_code_equals_400():
         "datetime_param", "2021-11-30T14:37:04.15"
     )
     assert response.status_code == HTTPStatus.BAD_REQUEST
-    assert "is not a 'date-time'" in response.text
+    assert NOT_A_DATETIME_MSG in response.text
 
 
 def test_post_model_predict_datetime_param_bad_day_status_code_equals_400():
@@ -232,7 +235,7 @@ def test_post_model_predict_datetime_param_bad_day_status_code_equals_400():
         "datetime_param", "2021-11-35T14:37:04.15Z"
     )
     assert response.status_code == HTTPStatus.BAD_REQUEST
-    assert "is not a 'date-time'" in response.text
+    assert NOT_A_DATETIME_MSG in response.text
 
 
 def test_post_model_predict_datetime_param_bad_month_status_code_equals_400():
@@ -242,7 +245,7 @@ def test_post_model_predict_datetime_param_bad_month_status_code_equals_400():
         "datetime_param", "2021-13-30T14:37:04.15Z"
     )
     assert response.status_code == HTTPStatus.BAD_REQUEST
-    assert "is not a 'date-time'" in response.text
+    assert NOT_A_DATETIME_MSG in response.text
 
 
 def test_post_model_predict_datetime_param_bad_year_status_code_equals_400():
@@ -252,7 +255,7 @@ def test_post_model_predict_datetime_param_bad_year_status_code_equals_400():
         "datetime_param", "999-11-30T14:37:04.15Z"
     )
     assert response.status_code == HTTPStatus.BAD_REQUEST
-    assert "is not a 'date-time'" in response.text
+    assert NOT_A_DATETIME_MSG in response.text
 
 
 def test_post_model_predict_datetime_param_missing_hyphen_status_code_equals_400():
@@ -262,7 +265,7 @@ def test_post_model_predict_datetime_param_missing_hyphen_status_code_equals_400
         "datetime_param", "2021-1130T14:37:04.15Z"
     )
     assert response.status_code == HTTPStatus.BAD_REQUEST
-    assert "is not a 'date-time'" in response.text
+    assert NOT_A_DATETIME_MSG in response.text
 
 
 def test_post_model_predict_datetime_param_missing_t_status_code_equals_400():
@@ -272,7 +275,7 @@ def test_post_model_predict_datetime_param_missing_t_status_code_equals_400():
         "datetime_param", "2021-11-3014:37:04.15Z"
     )
     assert response.status_code == HTTPStatus.BAD_REQUEST
-    assert "is not a 'date-time'" in response.text
+    assert NOT_A_DATETIME_MSG in response.text
 
 
 def test_post_model_predict_datetime_param_missing_colon_status_code_equals_400():
@@ -282,7 +285,7 @@ def test_post_model_predict_datetime_param_missing_colon_status_code_equals_400(
         "datetime_param", "2021-11-30T1437:04.15Z"
     )
     assert response.status_code == HTTPStatus.BAD_REQUEST
-    assert "is not a 'date-time'" in response.text
+    assert NOT_A_DATETIME_MSG in response.text
 
 
 def test_post_model_predict_datetime_param_bad_hour_status_code_equals_400():
@@ -292,7 +295,7 @@ def test_post_model_predict_datetime_param_bad_hour_status_code_equals_400():
         "datetime_param", "2021-11-30T34:37:04.15Z"
     )
     assert response.status_code == HTTPStatus.BAD_REQUEST
-    assert "is not a 'date-time'" in response.text
+    assert NOT_A_DATETIME_MSG in response.text
 
 
 def test_post_model_predict_datetime_param_bad_minute_status_code_equals_400():
@@ -302,7 +305,7 @@ def test_post_model_predict_datetime_param_bad_minute_status_code_equals_400():
         "datetime_param", "2021-11-30T14:77:04.15Z"
     )
     assert response.status_code == HTTPStatus.BAD_REQUEST
-    assert "is not a 'date-time'" in response.text
+    assert NOT_A_DATETIME_MSG in response.text
 
 
 def test_post_model_predict_datetime_param_bad_second_status_code_equals_400():
@@ -312,7 +315,7 @@ def test_post_model_predict_datetime_param_bad_second_status_code_equals_400():
         "datetime_param", "2021-11-30T14:37:64.15Z"
     )
     assert response.status_code == HTTPStatus.BAD_REQUEST
-    assert "is not a 'date-time'" in response.text
+    assert NOT_A_DATETIME_MSG in response.text
 
 
 def test_post_model_predict_date_param_bad_year_status_code_equals_400():
@@ -320,7 +323,7 @@ def test_post_model_predict_date_param_bad_year_status_code_equals_400():
     with 400 and flags wrong type."""
     response = _post_request_good_json_with_overrides("date_param", "999-10-26")
     assert response.status_code == HTTPStatus.BAD_REQUEST
-    assert "is not a 'date'" in response.text
+    assert NOT_A_DATE_MSG in response.text
 
 
 def test_post_model_predict_date_param_bad_month_status_code_equals_400():
@@ -328,7 +331,7 @@ def test_post_model_predict_date_param_bad_month_status_code_equals_400():
     with 400 and flags wrong type."""
     response = _post_request_good_json_with_overrides("date_param", "2021-18-26")
     assert response.status_code == HTTPStatus.BAD_REQUEST
-    assert "is not a 'date'" in response.text
+    assert NOT_A_DATE_MSG in response.text
 
 
 def test_post_model_predict_date_param_bad_day_status_code_equals_400():
@@ -336,7 +339,7 @@ def test_post_model_predict_date_param_bad_day_status_code_equals_400():
     with 400 and flags wrong type."""
     response = _post_request_good_json_with_overrides("date_param", "2021-10-51")
     assert response.status_code == HTTPStatus.BAD_REQUEST
-    assert "is not a 'date'" in response.text
+    assert NOT_A_DATE_MSG in response.text
 
 
 def test_post_model_predict_date_param_missing_hyphen_status_code_equals_400():
@@ -344,4 +347,4 @@ def test_post_model_predict_date_param_missing_hyphen_status_code_equals_400():
     400 and flags wrong type."""
     response = _post_request_good_json_with_overrides("date_param", "2021-1026")
     assert response.status_code == HTTPStatus.BAD_REQUEST
-    assert "is not a 'date'" in response.text
+    assert NOT_A_DATE_MSG in response.text
