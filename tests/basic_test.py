@@ -84,14 +84,14 @@ def test_get_liveness_status_code_equals_200():
     """Verify that /api/liveness succeeds with 200 "Alive"."""
     response = _get_request(ROOT_URL + LIVENESS_PATH)
     assert response.status_code == HTTPStatus.OK
-    assert "Alive" in response.text
+    assert "Alive" in response.text and "true" in response.text
 
 
 def test_get_readiness_status_code_equals_200():
     """Verify that /api/readiness succeeds with 200 "Ready"."""
     response = _get_request(ROOT_URL + READINESS_PATH)
     assert response.status_code == HTTPStatus.OK
-    assert "Ready" in response.text
+    assert "Ready" in response.text and "true" in response.text
 
 
 def test_post_model_predict_no_headers_no_payload_status_code_equals_400():

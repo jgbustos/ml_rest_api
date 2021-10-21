@@ -1,11 +1,11 @@
 """Module that creates the Api object and declares default error handler."""
 from logging import Logger, getLogger
-from typing import Tuple, Iterable
+from typing import Tuple, Dict
 from jsonschema import FormatChecker
 from flask_restx import Api
 from ml_rest_api.settings import get_value
 
-FlaskApiReturnType = Tuple[Iterable, int]
+FlaskApiReturnType = Tuple[Dict, int]
 
 log: Logger = getLogger(__name__)
 

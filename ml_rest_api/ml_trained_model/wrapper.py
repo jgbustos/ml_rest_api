@@ -82,11 +82,11 @@ class TrainedModelWrapper:
             self._init()
             self.initialised = True
 
-    def run(self, data: Iterable) -> Iterable:
+    def run(self, data: Iterable) -> Dict:
         """Calls the wrapped run() method if it's assigned."""
         if self._run:
             return self._run(data)
-        return []
+        return {}
 
     def sample(self) -> Dict:
         """Calls the wrapped sample() method if it's assigned."""

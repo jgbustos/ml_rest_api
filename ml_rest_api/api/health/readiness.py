@@ -19,6 +19,5 @@ class HealthReadiness(Resource):
         """
         Returns readiness status
         """
-        if trained_model_wrapper.ready():
-            return "Ready", 200
-        return "Not Ready", 500
+        _ready = trained_model_wrapper.ready()
+        return {"Ready": _ready}, 200 if _ready else 500

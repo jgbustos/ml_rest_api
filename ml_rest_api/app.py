@@ -13,6 +13,7 @@ import ml_rest_api.api.model.predict  # pylint: disable=unused-import
 
 IN_UWSGI: bool = True
 try:
+    # pyright: reportMissingImports=false
     import uwsgi  # pylint: disable=unused-import
 except ImportError:
     IN_UWSGI = False

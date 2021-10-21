@@ -71,4 +71,4 @@ class ModelPredict(Resource):
             data = dict(json.loads(request.data))
             ret = trained_model_wrapper.run(data)
             return ret, 200
-        return "Not Ready", 500
+        return {"Ready": False}, 500

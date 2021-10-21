@@ -17,4 +17,4 @@ class HealthLiveness(Resource):
         """
         Returns liveness status.
         """
-        return "Alive", 200
+        return {"Alive": True}, 200

@@ -31,7 +31,7 @@ def init() -> None:
     #  feature_selector = joblib.load(full_path('feature_selector.pkl'))
 
 
-def run(input_data: Iterable) -> Iterable:
+def run(input_data: Iterable) -> Dict:
     """Makes a prediction using the trained ML model."""
     log.info("input_data:%s", input_data)
     data: pd.DataFrame = (
@@ -48,11 +48,11 @@ def run(input_data: Iterable) -> Iterable:
     # then make (or mock) a prediction
     #  prediction = MODEL.predict(data)
 
-    prediction: Iterable = np.asarray(["mock_prediction"])
+    prediction = "mock_prediction"
     if isinstance(prediction, np.ndarray):
-        prediction = prediction.tolist()
-    log.info("data:%s - prediction:%s", data.values[0], prediction)
-    return prediction
+        prediction = prediction.tolist()[0]
+    log.info("data:%s - prediction:%s", data.values[0], [prediction])
+    return {"prediction": prediction}
 
 
 def sample() -> Dict:
