@@ -29,11 +29,11 @@ def configure_app(flask_app: Flask) -> None:
         "RESTX_MASK_SWAGGER",
         "SWAGGER_UI_JSONEDITOR",
         "ERROR_404_HELP",
-        "SECRET_KEY",
         "WTF_CSRF_ENABLED",
     ]
     for key in flask_settings_to_apply:
         flask_app.config[key] = get_value(key)
+    flask_app.config["SECRET_KEY"] = os.urandom(32)
 
 
 def initialize_app(flask_app: Flask) -> None:
