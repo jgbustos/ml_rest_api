@@ -2,6 +2,7 @@
 
 [![CircleCI](https://img.shields.io/circleci/build/github/jgbustos/ml_rest_api/master?logo=CircleCI&label=CircleCI%20build)](https://circleci.com/gh/jgbustos/ml_rest_api)
 [![Build and publish Docker image](https://github.com/jgbustos/ml_rest_api/actions/workflows/main.yml/badge.svg)](https://github.com/jgbustos/ml_rest_api/actions/workflows/main.yml)
+[![Sonarcloud Status](https://sonarcloud.io/api/project_badges/measure?project=jgbustos_ml_rest_api&metric=alert_status)](https://sonarcloud.io/dashboard?id=jgbustos_ml_rest_api) 
 
 A RESTful API to return predictions from a trained ML model, built with Python 3 and Flask-RESTX
 
@@ -60,22 +61,24 @@ These two methods are meant to be used as the liveness and readiness probes in a
 Configuration parameters are contained in the file **ml_rest_api/settings.py**, but they can also be overriden by setting env vars:
 
 ```python
-settings = {
+settings: Dict = {
     # Flask settings
-    'FLASK_SERVER_NAME': 'localhost:8888',
-    'FLASK_HOST': '0.0.0.0',
-    'FLASK_PORT': 8888,
-    'FLASK_DEBUG': True,
-
+    "FLASK_SERVER_NAME": "localhost:8888",
+    "FLASK_HOST": "0.0.0.0",
+    "FLASK_PORT": 8888,
+    "FLASK_DEBUG": True,  # Do not use debug mode in production
     # Flask-RESTX settings
-    'SWAGGER_UI_DOC_EXPANSION': 'list',
-    'RESTX_VALIDATE': True,
-    'RESTX_MASK_SWAGGER': False,
-    'ERROR_404_HELP': False,
-    'SWAGGER_UI_JSONEDITOR': True,
-
+    "SWAGGER_UI_DOC_EXPANSION": "list",
+    "RESTX_VALIDATE": True,
+    "RESTX_MASK_SWAGGER": False,
+    "ERROR_404_HELP": False,
+    "SWAGGER_UI_JSONEDITOR": True,
+    # Flask-WTF settings
+    "WTF_CSRF_ENABLED": True,
     # Trained ML/AI model settings
-    'TRAINED_MODEL_MODULE_NAME': 'ml_trained_model',
+    "TRAINED_MODEL_MODULE_NAME": "ml_trained_model",
+    # Module settings
+    "MULTITHREADED_INIT": True,
 }
 ```
 
@@ -89,8 +92,10 @@ settings = {
 | RESTX_VALIDATE | False/True | Explained here: <https://flask-restx.readthedocs.io/en/stable/swagger.html#the-api-expect-decorator> |
 | RESTX_MASK_SWAGGER | False/True | Explained here: <https://flask-restx.readthedocs.io/en/stable/mask.html#usage> |
 | ERROR_404_HELP | False/True | Explained here: <https://flask-restx.readthedocs.io/en/stable/quickstart.html#endpoints> |
+| WTF_CSRF_ENABLED | False/True | Enable CSRF protection using Flask-WTF pip module |
 | SWAGGER_UI_JSONEDITOR | False/True | Enable a JSON editor in the Swagger interface |
 | TRAINED_MODEL_MODULE_NAME | e.g.: ml_trained_model | Name of the Python module that initialises the ML model and returns predictions (see [section below](#setting-up-the-model)) |
+| MULTITHREADED_INIT | False/True | Multi-threaded initialisation of the trained model |
 
 ## Setting up the model
 
