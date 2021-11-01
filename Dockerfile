@@ -1,6 +1,6 @@
-# This is an official Python runtime, used as the parent image
-# Python 3.8 on Debian "Buster"
-FROM python:3.8-slim-buster
+# This is my own base image from the Docker Hub
+# See https://github.com/jgbustos/ml-model-base-docker
+FROM jgbustos/ml-model-base:latest
 
 # Parent image to run under Nginx+uWSGI
 # Python 3.8 on Debian "Stretch"
