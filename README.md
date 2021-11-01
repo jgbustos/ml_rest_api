@@ -2,7 +2,8 @@
 
 [![CircleCI](https://img.shields.io/circleci/build/github/jgbustos/ml_rest_api/master?logo=CircleCI&label=CircleCI%20build)](https://circleci.com/gh/jgbustos/ml_rest_api)
 [![Build and publish Docker image](https://github.com/jgbustos/ml_rest_api/actions/workflows/main.yml/badge.svg)](https://github.com/jgbustos/ml_rest_api/actions/workflows/main.yml)
-[![Sonarcloud Status](https://sonarcloud.io/api/project_badges/measure?project=jgbustos_ml_rest_api&metric=alert_status)](https://sonarcloud.io/dashboard?id=jgbustos_ml_rest_api) 
+[![Sonarcloud Status](https://sonarcloud.io/api/project_badges/measure?project=jgbustos_ml_rest_api&metric=alert_status)](https://sonarcloud.io/dashboard?id=jgbustos_ml_rest_api)
+[![Known Vulnerabilities](https://snyk.io/test/github/jgbustos/ml_rest_api/badge.svg)](https://app.snyk.io/org/jgbustos/projects)
 
 A RESTful API to return predictions from a trained ML model, built with Python 3 and Flask-RESTX
 
