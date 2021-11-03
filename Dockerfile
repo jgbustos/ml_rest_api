@@ -3,12 +3,12 @@
 FROM jgbustos/ml-model-base:latest
 
 # Parent image to run under Nginx+uWSGI
-# Python 3.8 on Debian "Stretch"
-# FROM tiangolo/uwsgi-nginx-flask:python3.8
+# Python 3.9 on Debian
+# FROM tiangolo/uwsgi-nginx-flask:python3.9
 
 # Parent image to run under Meinheld+Gunicorn
-# Python 3.8 on Debian "Stretch"
-# FROM tiangolo/meinheld-gunicorn-flask:python3.8
+# Python 3.9 on Debian
+# FROM tiangolo/meinheld-gunicorn-flask:python3.9
 
 LABEL maintainer="j.garciadebustos@godeltech.com"
 

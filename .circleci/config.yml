@@ -8,7 +8,7 @@ jobs:
     docker:
       # specify the version you desire here
       # use `-browsers` prefix for selenium tests, e.g. `3.6.1-browsers`
-      - image: circleci/python:3.8
+      - image: circleci/python:3.9-buster
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
@@ -25,7 +25,7 @@ jobs:
       # Download and cache dependencies
       - restore_cache:
           keys:
-            - v1-dependencies-py38-{{ arch }}-{{ checksum "requirements.txt" }}
+            - v1-dependencies-py39-{{ arch }}-{{ checksum "requirements.txt" }}
             # fallback to using the latest cache if no exact match is found
             # - v1-dependencies-
 
@@ -41,7 +41,7 @@ jobs:
       - save_cache:
           paths:
             - ./venv
-          key: v1-dependencies-py38-{{ arch }}-{{ checksum "requirements.txt" }}
+          key: v1-dependencies-py39-{{ arch }}-{{ checksum "requirements.txt" }}
 
       - run:
           name: pylint checks
