@@ -93,7 +93,7 @@ settings: Dict = {
 | RESTX_VALIDATE | False/True | Explained here: <https://flask-restx.readthedocs.io/en/stable/swagger.html#the-api-expect-decorator> |
 | RESTX_MASK_SWAGGER | False/True | Explained here: <https://flask-restx.readthedocs.io/en/stable/mask.html#usage> |
 | ERROR_404_HELP | False/True | Explained here: <https://flask-restx.readthedocs.io/en/stable/quickstart.html#endpoints> |
-| WTF_CSRF_ENABLED | False/True | Enable CSRF protection using Flask-WTF pip module |
+| WTF_CSRF_ENABLED | False/True | Enable CSRF protection using [Flask-WTF pip module](https://pypi.org/project/Flask-WTF/)|
 | SWAGGER_UI_JSONEDITOR | False/True | Enable a JSON editor in the Swagger interface |
 | TRAINED_MODEL_MODULE_NAME | e.g.: ml_trained_model | Name of the Python module that initialises the ML model and returns predictions (see [section below](#setting-up-the-model)) |
 | MULTITHREADED_INIT | False/True | Multi-threaded initialisation of the trained model |
@@ -104,7 +104,7 @@ The trained ML model is meant to be initialised and invoked to make predictions 
 
 ## Build automation
 
-This project is built into a Docker image using the Docker Hub automated build at <https://hub.docker.com/r/jgbustos/ml-rest-api/>
+This project is built into a container image using GitHub Actions and pushed to the Docker Hub at <https://hub.docker.com/r/jgbustos/ml-rest-api/>
 
 ## Running the Docker container
 
