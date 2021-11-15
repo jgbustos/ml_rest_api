@@ -5,6 +5,19 @@ from jsonschema import FormatChecker
 from flask_restx import Api
 from ml_rest_api.settings import get_value
 
+
+class MLRestAPIException(Exception):
+    """Base ML Rest API Exception"""
+
+    ...
+
+
+class MLRestAPINotReadyException(MLRestAPIException):
+    """Base ML Rest API NOT READY Exception"""
+
+    ...
+
+
 FlaskApiReturnType = Tuple[Dict, int]
 
 log: Logger = getLogger(__name__)
@@ -23,6 +36,13 @@ api = Api(  # pylint: disable=invalid-name
     default="health",
     default_label="Basic health check methods",
 )
+
+
+@api.errorhandler(MLRestAPINotReadyException)
+def not_ready_error_handler() -> FlaskApiReturnType:
+    """NOT READY error handler that returns HTTP 503 error."""
+    log.exception("Server Not Ready")
+    return {"message": "Server Not Ready"}, 503
 
 
 @api.errorhandler

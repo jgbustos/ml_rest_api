@@ -12,7 +12,7 @@ class HealthReadiness(Resource):
     @api.doc(
         responses={
             200: "Success",
-            500: "Server Not Ready",
+            503: "Server Not Ready",
         }
     )
     def get() -> FlaskApiReturnType:
@@ -20,4 +20,4 @@ class HealthReadiness(Resource):
         Returns readiness status
         """
         _ready = trained_model_wrapper.ready()
-        return {"Ready": _ready}, 200 if _ready else 500
+        return {"Ready": _ready}, 200 if _ready else 503

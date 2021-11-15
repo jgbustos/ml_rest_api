@@ -22,7 +22,10 @@ MODEL: Any = None
 
 def init() -> None:
     """Loads the ML trained model (plus ancillary files) from file."""
+    from time import sleep  # pylint: disable=import-outside-toplevel
+
     log.debug("Initialise model from file %s", full_path("model.pkl"))
+    sleep(5)  # Fake delay to emulate a large model that takes a long time to load
 
     # deserialise the ML model (and possibly other objects such as feature_list,
     # feature_selector) from pickle file(s):
