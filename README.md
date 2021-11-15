@@ -48,14 +48,15 @@ Swagger JSON available from URL <http://localhost:8888/api/swagger.json>
 These two methods are meant to be used as the liveness and readiness probes in a Kubernetes deployment:
 
 * GET <http://localhost:8888/api/liveness> returns 200/"Alive" if the service is up and running
-* GET <http://localhost:8888/api/readiness> returns 200/"Ready" or 500/"Not Ready" depending on whether the ML model has been correctly initialised or not
+* GET <http://localhost:8888/api/readiness> returns 200/"Ready" or 503/"Not Ready" depending on whether the ML model has been correctly initialised or not
 
 ### Model
 
 * POST <http://localhost:8888/api/model/predict> will return a prediction using the ML model. The data_point structure shows the JSON argument that must be supplied, and example values for each of the fields. The service will validate that all the mandatory values are passed. Return values are:
-  * 500/"Not Ready" if model is not correctly initialised
-  * 400/Validation error if any mandatory parameter is missing or if any wrong data type (e.g. str, int, bool, datetime...) is supplied
   * 200/Predicted value based on JSON input
+  * 400/Validation error if any mandatory parameter is missing or if any wrong data type (e.g. str, int, bool, datetime...) is supplied
+  * 500/"Internal Server Error" as catch-all exception handler
+  * 503/"Not Ready" if model is not initialised
 
 ## Config settings
 
