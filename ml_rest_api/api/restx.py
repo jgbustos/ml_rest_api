@@ -9,13 +9,9 @@ from ml_rest_api.settings import get_value
 class MLRestAPIException(Exception):
     """Base ML Rest API Exception"""
 
-    ...
-
 
 class MLRestAPINotReadyException(MLRestAPIException):
     """Base ML Rest API NOT READY Exception"""
-
-    ...
 
 
 FlaskApiReturnType = Tuple[Dict, int]
