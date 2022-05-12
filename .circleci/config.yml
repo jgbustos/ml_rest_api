@@ -8,7 +8,7 @@ jobs:
     docker:
       # specify the version you desire here
       # use `-browsers` prefix for selenium tests, e.g. `3.6.1-browsers`
-      - image: circleci/python:3.9-buster
+      - image: cimg/python:3.10
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
@@ -25,7 +25,7 @@ jobs:
       # Download and cache dependencies
       - restore_cache:
           keys:
-            - v1-dependencies-py39-{{ arch }}-{{ checksum "requirements.txt" }}
+            - v1-dependencies-py310-{{ arch }}-{{ checksum "requirements.txt" }}
             # fallback to using the latest cache if no exact match is found
             # - v1-dependencies-
 
@@ -41,27 +41,27 @@ jobs:
       - save_cache:
           paths:
             - ./venv
-          key: v1-dependencies-py39-{{ arch }}-{{ checksum "requirements.txt" }}
+          key: v1-dependencies-py310-{{ arch }}-{{ checksum "requirements.txt" }}
 
       - run:
           name: pylint checks
           command: |
             . venv/bin/activate
-            pip install pylint==2.12.2
+            pip install pylint==2.13.8
             python -m pylint ml_rest_api
 
       - run:
           name: mypy type hint checks
           command: |
             . venv/bin/activate
-            pip install mypy==0.931
+            pip install mypy==0.950
             python -m mypy --pretty --config-file=mypy.ini ml_rest_api
 
       - run:
           name: black formatter checks
           command: |
             . venv/bin/activate
-            pip install black==22.1.0
+            pip install black==22.3.0
             python -m black --check ml_rest_api
 
       # run tests!
