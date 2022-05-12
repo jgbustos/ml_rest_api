@@ -3,8 +3,8 @@
 FROM jgbustos/ml-model-base:latest
 
 # Parent image to run under Nginx+uWSGI
-# Python 3.9 on Debian
-# FROM tiangolo/uwsgi-nginx-flask:python3.9
+# Python 3.10 on Debian
+# FROM tiangolo/uwsgi-nginx-flask:python3.10
 
 # Parent image to run under Meinheld+Gunicorn
 # Python 3.9 on Debian
