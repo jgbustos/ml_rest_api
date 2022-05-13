@@ -28,7 +28,7 @@ PS > venv\scripts\activate.ps1
 Once dependencies are installed, set up the project for development
 
 ```Powershell
-(venv) PS > python setup.py develop
+(venv) PS > pip install -e .
 ```
 
 Finally, run the project:

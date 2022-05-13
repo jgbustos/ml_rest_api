@@ -1,4 +1,4 @@
-setuptools>=58.0.0
+setuptools>=62.0.0
 Flask==2.1.2
 flask-restx==0.5.1
 Flask-WTF==1.0.1
