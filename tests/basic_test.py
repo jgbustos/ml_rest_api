@@ -4,8 +4,8 @@ from http import HTTPStatus
 from json import loads
 import requests
 import pytest
-from openapi_spec_validator import openapi_v2_spec_validator, openapi_v3_spec_validator
-from openapi_spec_validator.exceptions import OpenAPIValidationError
+from openapi_spec_validator import openapi_v2_spec_validator, openapi_v30_spec_validator
+from openapi_spec_validator.validation.exceptions import OpenAPIValidationError
 
 
 ROOT_URL = "http://localhost:8888/api/"
@@ -79,7 +79,7 @@ def test_get_swagger_json_is_not_valid_openapi_v3():
     response = _get_request(ROOT_URL + SWAGGER_JSON_PATH)
     spec_dict = loads(response.text)
     with pytest.raises(OpenAPIValidationError):
-        openapi_v3_spec_validator.validate(spec_dict)
+        openapi_v30_spec_validator.validate(spec_dict)
     assert response.status_code == HTTPStatus.OK
 
 
