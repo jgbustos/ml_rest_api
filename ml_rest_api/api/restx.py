@@ -2,6 +2,7 @@
 from logging import Logger, getLogger
 from typing import Tuple, Dict
 from jsonschema import FormatChecker
+from flask import Blueprint
 from flask_restx import Api
 from ml_rest_api.settings import get_value
 
@@ -18,7 +19,10 @@ FlaskApiReturnType = Tuple[Dict, int]
 
 log: Logger = getLogger(__name__)
 
+blueprint = Blueprint("api", __name__, url_prefix="/api")
+
 api = Api(  # pylint: disable=invalid-name
+    blueprint,
     version="0.1",
     title="Machine Learning REST API",
     description="A RESTful API to return predictions from a trained ML model, \

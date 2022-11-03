@@ -1,6 +1,6 @@
 """This module implements the ModelPredict class."""
 import json
-from typing import Dict
+from typing import Type, Dict
 from aniso8601 import parse_date, parse_datetime
 from flask import request
 from flask_restx import Resource, Model, fields
@@ -25,7 +25,7 @@ def build_api_model() -> Model:
     model_sample: Dict = trained_model_wrapper.sample()
     if model_sample:
         for key, value in model_sample.items():
-            fields_class: fields.Raw = fields_classes_map.get(
+            fields_class: Type[fields.Raw] = fields_classes_map.get(
                 type(value).__name__, fields.String
             )
             if type(value).__name__ == "str":
