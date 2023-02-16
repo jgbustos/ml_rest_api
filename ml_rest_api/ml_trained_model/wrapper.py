@@ -3,6 +3,7 @@ import os
 import os.path
 import importlib
 from threading import Thread
+from types import ModuleType
 from typing import Optional, Iterable, Callable, Dict
 from ml_rest_api.settings import get_value
 
@@ -11,16 +12,17 @@ WrapperCallableType = Optional[Callable]
 
 class TrainedModelWrapper:
     """TrainedModelWrapper class acts as adapter for programmatically chosen ML trained model
-    module. The init(), run() and sample() methods call the module's identically named methods."""
+    module. The init(), run() and sample() methods call the module's identically named methods.
+    """
 
-    def __init__(self):
+    def __init__(self) -> None:
         """Initialise everything to None, particularly init, run, sample and ready methods."""
         self._init: WrapperCallableType = None
         self._run: WrapperCallableType = None
         self._sample: WrapperCallableType = None
         self.initialised: bool = False
         self.module_name: Optional[str] = None
-        self.module = None
+        self.module: Optional[ModuleType] = None
 
     def load(self, module_name: str) -> None:
         """Loads a Python module, binding the init, run and sample callable methods."""
