@@ -97,10 +97,10 @@ def test_get_readiness_status_code_equals_200():
     assert "Ready" in response.text and "true" in response.text
 
 
-def test_post_model_predict_no_headers_no_payload_status_code_equals_400():
-    """Verify that calling /api/model/predict with no headers and no payload fails with 400."""
+def test_post_model_predict_no_headers_no_payload_status_code_equals_415():
+    """Verify that calling /api/model/predict with no headers and no payload fails with 415."""
     response = _post_request(ROOT_URL + MODEL_PREDICT_PATH)
-    assert response.status_code == HTTPStatus.BAD_REQUEST
+    assert response.status_code == HTTPStatus.UNSUPPORTED_MEDIA_TYPE
 
 
 def test_post_model_predict_no_payload_status_code_equals_400():
