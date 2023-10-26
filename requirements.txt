@@ -2,7 +2,7 @@ setuptools>=62.0.0
 Flask==2.3.2
 flask-restx==1.1.0
 Flask-WTF==1.1.1
-Werkzeug==2.3.3
+Werkzeug==3.0.1
 rfc3339-validator==0.1.4
 numpy==1.24.3
 pandas==2.0.1
