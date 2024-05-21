@@ -1,4 +1,5 @@
 """Settings file."""
+
 import os
 from typing import Any, Dict
 

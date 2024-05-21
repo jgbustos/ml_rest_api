@@ -1,4 +1,5 @@
 """This module implements the ModelPredict class."""
+
 import json
 from typing import Type, Dict
 from aniso8601 import parse_date, parse_datetime

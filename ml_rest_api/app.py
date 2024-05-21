@@ -1,4 +1,5 @@
 """This module is the RESTful service entry point."""
+
 import os
 import warnings
 from logging import Logger, getLogger

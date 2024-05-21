@@ -1,4 +1,5 @@
 """This module implements the HealthLiveness class."""
+
 from flask_restx import Resource
 from ml_rest_api.api.restx import api, FlaskApiReturnType
 

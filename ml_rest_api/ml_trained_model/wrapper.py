@@ -1,4 +1,5 @@
 """This module implements the TrainedModelWrapper class."""
+
 import os
 import os.path
 import importlib

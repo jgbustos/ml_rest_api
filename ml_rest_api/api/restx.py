@@ -1,4 +1,5 @@
 """Module that creates the Api object and declares default error handler."""
+
 from logging import Logger, getLogger
 from typing import Tuple, Dict
 from jsonschema import FormatChecker
