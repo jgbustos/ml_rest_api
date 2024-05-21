@@ -4,7 +4,11 @@ from http import HTTPStatus
 from json import loads
 import requests
 import pytest
-from openapi_spec_validator import openapi_v2_spec_validator, openapi_v30_spec_validator
+from openapi_spec_validator import (
+    validate,
+    OpenAPIV2SpecValidator,
+    OpenAPIV30SpecValidator,
+)
 from openapi_spec_validator.validation.exceptions import OpenAPIValidationError
 
 
@@ -70,7 +74,7 @@ def test_get_swagger_json_is_valid_openapi_v2():
     """Verify that /api/swagger.json file complies with OpenAPI v2."""
     response = _get_request(ROOT_URL + SWAGGER_JSON_PATH)
     spec_dict = loads(response.text)
-    openapi_v2_spec_validator.validate(spec_dict)
+    validate(spec_dict, cls=OpenAPIV2SpecValidator)
     assert response.status_code == HTTPStatus.OK
 
 
@@ -79,7 +83,7 @@ def test_get_swagger_json_is_not_valid_openapi_v3():
     response = _get_request(ROOT_URL + SWAGGER_JSON_PATH)
     spec_dict = loads(response.text)
     with pytest.raises(OpenAPIValidationError):
-        openapi_v30_spec_validator.validate(spec_dict)
+        validate(spec_dict, cls=OpenAPIV30SpecValidator)
     assert response.status_code == HTTPStatus.OK
 
 
