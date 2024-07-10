@@ -6,3 +6,4 @@ Werkzeug==3.0.3
 rfc3339-validator==0.1.4
 numpy==1.26.4
 pandas==2.2.2
+zipp>=3.19.1 # not directly required, pinned by Snyk to avoid a vulnerability
