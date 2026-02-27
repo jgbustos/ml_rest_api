@@ -3,9 +3,9 @@
 import os
 import warnings
 from logging import Logger, getLogger
-import logging.config
 from flask import Flask
 from flask_wtf import CSRFProtect  # pylint: disable=unused-import  # type: ignore
+from ml_rest_api.logging_setup import setup_logging
 from ml_rest_api.settings import get_value
 from ml_rest_api.ml_trained_model.wrapper import trained_model_wrapper
 from ml_rest_api.api.restx import blueprint
@@ -65,9 +65,7 @@ def main() -> None:
 
 
 APP = Flask(__name__)
-logging.config.fileConfig(
-    os.path.normpath(os.path.join(os.path.dirname(__file__), "../logging.conf"))
-)
+setup_logging()
 log: Logger = getLogger(__name__)
 initialize_app(APP)
 
