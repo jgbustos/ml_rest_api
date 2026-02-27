@@ -1,10 +1,17 @@
 .git
 .vscode
+.claude
 *_hdi_settings.json
 *.ps1
+*.sh
 venv
 **/__pycache__
 *.egg-info
 .pytest_cache
 .mypy_cache
 *.code-workspace
+docker-compose.yml
+nginx
+tests
+requirements-dev.txt
+.circleci
