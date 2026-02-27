@@ -4,7 +4,7 @@ import os
 import warnings
 from logging import Logger, getLogger
 from flask import Flask
-from flask_wtf import CSRFProtect  # pylint: disable=unused-import  # type: ignore
+from flask_wtf import CSRFProtect  # type: ignore
 from ml_rest_api.logging_setup import setup_logging
 from ml_rest_api.settings import get_value
 from ml_rest_api.ml_trained_model.wrapper import trained_model_wrapper
@@ -39,6 +39,7 @@ def configure_app(flask_app: Flask) -> None:
 def initialize_app(flask_app: Flask) -> None:
     """Initialises the app."""
     configure_app(flask_app)
+    CSRFProtect(flask_app)
     with warnings.catch_warnings():
         # Temporarily suppressing a warning during registration of the Flask blueprint
         warnings.filterwarnings(
