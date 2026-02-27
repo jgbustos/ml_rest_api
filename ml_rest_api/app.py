@@ -4,27 +4,25 @@ import os
 import warnings
 from logging import Logger, getLogger
 import logging.config
-from typing import List
 from flask import Flask
-from flask_wtf import CSRFProtect  # pylint: disable=unused-import
+from flask_wtf import CSRFProtect  # pylint: disable=unused-import  # type: ignore
 from ml_rest_api.settings import get_value
 from ml_rest_api.ml_trained_model.wrapper import trained_model_wrapper
 from ml_rest_api.api.restx import blueprint
-import ml_rest_api.api.health.liveness  # pylint: disable=unused-import
-import ml_rest_api.api.health.readiness  # pylint: disable=unused-import
-import ml_rest_api.api.model.predict  # pylint: disable=unused-import
+import ml_rest_api.api.health.liveness  # pylint: disable=unused-import  # pyright: ignore[reportUnusedImport]
+import ml_rest_api.api.health.readiness  # pylint: disable=unused-import  # pyright: ignore[reportUnusedImport]
+import ml_rest_api.api.model.predict  # pylint: disable=unused-import  # pyright: ignore[reportUnusedImport]
 
 IN_UWSGI: bool = True  # pylint: disable=invalid-name
 try:
-    # pyright: reportMissingImports=false
-    import uwsgi  # pylint: disable=unused-import
+    import uwsgi  # pylint: disable=unused-import  # type: ignore
 except ImportError:
     IN_UWSGI = False  # pylint: disable=invalid-name
 
 
 def configure_app(flask_app: Flask) -> None:
     """Configures the app."""
-    flask_settings_to_apply: List = [
+    flask_settings_to_apply: list[str] = [
         #'FLASK_SERVER_NAME',
         "SWAGGER_UI_DOC_EXPANSION",
         "RESTX_VALIDATE",

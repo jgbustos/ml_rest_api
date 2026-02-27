@@ -1,10 +1,10 @@
 """This module implements the ModelPredict class."""
 
 import json
-from typing import Type, Dict
-from aniso8601 import parse_date, parse_datetime
+from typing import Any
+from aniso8601 import parse_date, parse_datetime  # type: ignore
 from flask import request
-from flask_restx import Resource, Model, fields
+from flask_restx import Resource, Model, fields  # type: ignore
 from ml_rest_api.api.restx import api, FlaskApiReturnType, MLRestAPINotReadyException
 from ml_rest_api.ml_trained_model.wrapper import trained_model_wrapper
 
@@ -14,7 +14,7 @@ def build_api_model() -> Model:
     Returns a Flask-RESTX Api Model based on the sample dict returned by the trained model wrapper.
     This will be used to validate input and automatically generate the Swagger prototype.
     """
-    fields_classes_map: Dict = {
+    fields_classes_map: dict[str, Any] = {
         "str": fields.String,
         "int": fields.Integer,
         "float": fields.Float,
@@ -22,11 +22,11 @@ def build_api_model() -> Model:
         "datetime": fields.DateTime,
         "date": fields.Date,
     }
-    model_dict: Dict = {}
-    model_sample: Dict = trained_model_wrapper.sample()
+    model_dict: dict[str, Any] = {}
+    model_sample: dict[str, Any] = trained_model_wrapper.sample()
     if model_sample:
         for key, value in model_sample.items():
-            fields_class: Type[fields.Raw] = fields_classes_map.get(
+            fields_class: Any = fields_classes_map.get(
                 type(value).__name__, fields.String
             )
             if type(value).__name__ == "str":
@@ -44,14 +44,14 @@ def build_api_model() -> Model:
     return api.model("input_vector", model_dict)
 
 
-ns = api.namespace(  # pylint: disable=invalid-name
+ns = api.namespace(  # pylint: disable=invalid-name  # type: ignore[misc]
     "model",
     description="Methods supported by our ML model",
     validate=bool(trained_model_wrapper.sample()),
 )
 
 
-@ns.route("/predict")
+@ns.route("/predict")  # type: ignore[misc]
 class ModelPredict(Resource):
     """Implements the /model/predict POST method."""
 

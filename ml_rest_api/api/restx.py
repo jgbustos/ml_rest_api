@@ -1,10 +1,10 @@
 """Module that creates the Api object and declares default error handler."""
 
 from logging import Logger, getLogger
-from typing import Tuple, Dict
+from typing import Any
 from jsonschema import FormatChecker
 from flask import Blueprint
-from flask_restx import Api
+from flask_restx import Api  # type: ignore
 from ml_rest_api.settings import get_value
 
 
@@ -16,7 +16,7 @@ class MLRestAPINotReadyException(MLRestAPIException):
     """Base ML Rest API NOT READY Exception"""
 
 
-FlaskApiReturnType = Tuple[Dict, int]
+FlaskApiReturnType = tuple[dict[str, Any], int]
 
 log: Logger = getLogger(__name__)
 
@@ -39,15 +39,15 @@ api = Api(  # pylint: disable=invalid-name
 )
 
 
-@api.errorhandler(MLRestAPINotReadyException)
+@api.errorhandler(MLRestAPINotReadyException)  # type: ignore[misc]
 def not_ready_error_handler() -> FlaskApiReturnType:
     """NOT READY error handler that returns HTTP 503 error."""
     log.exception("Server Not Ready")
     return {"message": "Server Not Ready"}, 503
 
 
-@api.errorhandler
-def default_error_handler(exception) -> FlaskApiReturnType:
+@api.errorhandler  # type: ignore[misc]
+def default_error_handler(exception: Any) -> FlaskApiReturnType:
     """Default error handler that returns HTTP 500 error."""
     log.exception(exception.message)
     if get_value("FLASK_DEBUG"):

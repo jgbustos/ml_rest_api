@@ -5,10 +5,10 @@ import os.path
 import importlib
 from threading import Thread
 from types import ModuleType
-from typing import Optional, Iterable, Callable, Dict
+from typing import Any, Optional, Iterable, Callable
 from ml_rest_api.settings import get_value
 
-WrapperCallableType = Optional[Callable]
+WrapperCallableType = Optional[Callable[..., Any]]
 
 
 class TrainedModelWrapper:
@@ -85,13 +85,13 @@ class TrainedModelWrapper:
             self._init()
             self.initialised = True
 
-    def run(self, data: Iterable) -> Dict:
+    def run(self, data: Iterable[Any]) -> dict[str, Any]:
         """Calls the wrapped run() method if it's assigned."""
         if self._run:
             return self._run(data)
         return {}
 
-    def sample(self) -> Dict:
+    def sample(self) -> dict[str, Any]:
         """Calls the wrapped sample() method if it's assigned."""
         if self._sample:
             return self._sample()

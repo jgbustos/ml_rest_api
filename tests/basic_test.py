@@ -2,6 +2,7 @@
 
 from http import HTTPStatus
 from json import loads
+from typing import Any
 import requests
 import pytest
 from openapi_spec_validator import (
@@ -20,7 +21,7 @@ HEADERS = {
     "Content-Type": "application/json",
     "Accept": "application/json",
 }
-GOOD_JSON_DICT = {
+GOOD_JSON_DICT: dict[str, Any] = {
     "int_param": 12345,
     "string_param": "foobar",
     "float_param": 123.45,
@@ -34,7 +35,7 @@ NOT_A_DATETIME_MSG = "is not a 'date-time'"
 NOT_A_DATE_MSG = "is not a 'date'"
 
 
-def _get_request(url):
+def _get_request(url: str):
     response = requests.get(
         url,
         allow_redirects=True,
@@ -43,7 +44,7 @@ def _get_request(url):
     return response
 
 
-def _post_request(url, headers=None, json=None):
+def _post_request(url: str, headers: dict[str, str] | None = None, json: Any = None):
     response = requests.post(
         url,
         headers=headers,
@@ -54,7 +55,9 @@ def _post_request(url, headers=None, json=None):
     return response
 
 
-def _post_request_good_json_with_overrides(override_key=None, override_value=None):
+def _post_request_good_json_with_overrides(
+    override_key: str | None = None, override_value: Any = None
+):
     json_dict = GOOD_JSON_DICT
     if override_key is not None:
         if override_value is None:
