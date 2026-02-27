@@ -1,0 +1,15 @@
+version: '3.9'
+
+services:
+  api_server:
+    build:
+      dockerfile: ./Dockerfile
+    command: /app/ml_rest_api/app.py
+    expose:
+      - 8888
+  nginx:
+    build: ./nginx
+    ports:
+      - 8888:8888
+    depends_on:
+      - api_server
