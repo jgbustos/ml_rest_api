@@ -36,7 +36,7 @@ def init() -> None:
     #  feature_selector = joblib.load(full_path('feature_selector.pkl'))
 
 
-def run(input_data: Iterable) -> Dict:
+def run(input_data: Iterable[Any]) -> Dict[str, Any]:
     """Makes a prediction using the trained ML model."""
     log.info("input_data:%s", input_data)
     data: pd.DataFrame = (
@@ -60,7 +60,7 @@ def run(input_data: Iterable) -> Dict:
     return {"prediction": prediction}
 
 
-def sample() -> Dict:
+def sample() -> Dict[str, Any]:
     """Returns a sample input vector as a dictionary."""
     return {
         "int_param": 10,
