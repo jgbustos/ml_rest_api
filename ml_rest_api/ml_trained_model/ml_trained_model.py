@@ -1,5 +1,6 @@
 # coding: utf-8
 """Module that does all the ML trained model prediction heavy lifting."""
+
 from logging import Logger, getLogger
 from datetime import datetime, date
 from os.path import normpath, join, dirname

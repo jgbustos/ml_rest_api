@@ -14,12 +14,12 @@ import ml_rest_api.api.health.liveness  # pylint: disable=unused-import
 import ml_rest_api.api.health.readiness  # pylint: disable=unused-import
 import ml_rest_api.api.model.predict  # pylint: disable=unused-import
 
-IN_UWSGI: bool = True
+IN_UWSGI: bool = True  # pylint: disable=invalid-name
 try:
     # pyright: reportMissingImports=false
     import uwsgi  # pylint: disable=unused-import
 except ImportError:
-    IN_UWSGI = False
+    IN_UWSGI = False  # pylint: disable=invalid-name
 
 
 def configure_app(flask_app: Flask) -> None:

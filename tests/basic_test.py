@@ -11,7 +11,6 @@ from openapi_spec_validator import (
 )
 from openapi_spec_validator.validation.exceptions import OpenAPIValidationError
 
-
 ROOT_URL = "http://localhost:8888/api/"
 SWAGGER_JSON_PATH = "swagger.json"
 LIVENESS_PATH = "liveness"
